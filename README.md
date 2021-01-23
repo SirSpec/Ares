@@ -7,11 +7,11 @@
 ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝
 ```
 
-# Role-playing game system
+# Fantasy role-playing game system
 
 ## Goals
 - Slick
 - Extendable
 
 ## Features
-- Easy statistics management and extensibility
+- Statistics management system
