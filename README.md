@@ -14,4 +14,6 @@
 - Extendable
 
 ## Features
-- Statistics management system
+- Statistics system
+- Inventory management
+- Progression tracking
