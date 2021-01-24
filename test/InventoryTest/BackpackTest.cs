@@ -35,7 +35,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Backpack(1);
-            var item = new StubSimpleItem();
+            var item = new SimpleItemStub();
 
             //Act
             sut.Put(item);
@@ -50,8 +50,8 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Backpack(1);
-            var item1 = new StubSimpleItem();
-            var item2 = new StubSimpleItem();
+            var item1 = new SimpleItemStub();
+            var item2 = new SimpleItemStub();
 
             //Act
             sut.Put(item1);
@@ -67,7 +67,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Backpack(2);
-            var item = new StubSimpleItem();
+            var item = new SimpleItemStub();
             sut.Put(item);
 
             //Act
@@ -82,8 +82,8 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Backpack(2);
-            var item1 = new StubSimpleItem();
-            var item2 = new StubSimpleItem();
+            var item1 = new SimpleItemStub();
+            var item2 = new SimpleItemStub();
 
             //Act
             sut.Put(item1);
@@ -98,7 +98,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Backpack(1);
-            var item = new StubSimpleItem();
+            var item = new SimpleItemStub();
 
             //Act
             sut.Put(item);
@@ -112,7 +112,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Backpack(1);
-            var item = new StubSimpleItem();
+            var item = new SimpleItemStub();
 
             //Act
             sut.Put(item);
@@ -128,8 +128,8 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Backpack(1);
-            var item1 = new StubSimpleItem();
-            var item2 = new StubSimpleItem();
+            var item1 = new SimpleItemStub();
+            var item2 = new SimpleItemStub();
             sut.Put(item1);
 
             //Act
