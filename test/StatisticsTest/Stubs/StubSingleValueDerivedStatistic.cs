@@ -7,8 +7,10 @@ namespace Ares.StatisticsTest.Stubs
         private readonly int baseValue;
         private readonly StubSingleValueStatistic stubSimpleStatistic;
 
+        public string Name => throw new System.NotImplementedException();
         public int BaseValue => baseValue;
         public int Value => baseValue + stubSimpleStatistic.Value;
+
 
         public StubSingleValueDerivedStatistic(int baseValue, StubSingleValueStatistic stubSimpleStatistic)
         {

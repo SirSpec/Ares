@@ -6,6 +6,7 @@ namespace Ares.StatisticsTest.Stubs
 {
     public class StubEnhanceableStatistic : IStatistic, IEnhanceable
     {
+        public string Name => throw new System.NotImplementedException();
         public int BaseValue => throw new System.NotImplementedException();
         public int Value => throw new System.NotImplementedException();
 

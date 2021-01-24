@@ -6,6 +6,7 @@ namespace Ares.StatisticsTest.Stubs
     {
         private readonly int baseValue;
 
+        public string Name => throw new System.NotImplementedException();
         public int BaseValue => baseValue;
         public int Value => baseValue;
 

@@ -9,9 +9,9 @@ namespace StatisticsTest
 {
     public class NonInitializedStatistic : IStatistic
     {
-        public int Value => throw new NotImplementedException();
-
+        public string Name => throw new NotImplementedException();
         public int BaseValue => throw new NotImplementedException();
+        public int Value => throw new NotImplementedException();
     }
 
     public class StatisticsSetGetStatisticTest
