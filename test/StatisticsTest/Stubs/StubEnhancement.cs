@@ -9,7 +9,7 @@ namespace Ares.StatisticsTest.Stubs
         public StubEnhancement(int value) =>
             this.value = value;
 
-        public int Enhance(int value) =>
-            this.value + value;
+        public int Enhance(int _) =>
+            value;
     }
 }
