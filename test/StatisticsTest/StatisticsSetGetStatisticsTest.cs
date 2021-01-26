@@ -6,7 +6,7 @@ using Ares.StatisticsTest.DummyObjects;
 using Ares.StatisticsTest.Stubs;
 using Xunit;
 
-namespace StatisticsTest
+namespace Ares.StatisticsTest
 {
     public class StatisticsSetGetStatisticsTest
     {

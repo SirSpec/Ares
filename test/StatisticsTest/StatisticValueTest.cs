@@ -1,7 +1,7 @@
 using Ares.StatisticsTest.Stubs;
 using Xunit;
 
-namespace StatisticsTest
+namespace Ares.StatisticsTest
 {
     public class StatisticValueTest
     {
