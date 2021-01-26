@@ -1,5 +1,6 @@
 using System;
 using Ares.Inventory;
+using Ares.Inventory.Implementations;
 using Ares.InventoryTest.Stubs;
 using Xunit;
 

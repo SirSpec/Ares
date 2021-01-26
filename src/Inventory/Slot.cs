@@ -7,17 +7,17 @@ namespace Ares.Inventory
         private IEquipable? item;
 
         public bool IsEmpty => item is null;
-        public SlotType Type { get; }
+        public Enum SlotType { get; }
 
         public IEquipable Item
         {
             get => item ?? throw new InvalidOperationException($"{nameof(Slot)} is Empty.");
-            set => item = value.SlotType == Type
+            set => item = value.SlotType.Equals(SlotType)
                 ? value
-                : throw new InvalidOperationException($"{nameof(SlotType)} of the Item:{value.SlotType} is invalid:{Type}.");
+                : throw new InvalidOperationException($"{nameof(SlotType)} of the Item:{value.SlotType} is invalid:{SlotType}.");
         }
 
-        public Slot(SlotType type) =>
-            Type = type;
+        public Slot(Enum slotType) =>
+            SlotType = slotType;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Ares.Inventory
+﻿namespace Ares.Inventory.Implementations
 {
     public enum SlotType
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Ares.Inventory;
+using SlotTypes = Ares.Inventory.Implementations.SlotType;
 
 namespace Ares.InventoryTest.Stubs
 {
@@ -9,15 +10,15 @@ namespace Ares.InventoryTest.Stubs
 
         public Weight Weight { get; } = new Weight(new Random().Next(1, 5));
 
-        public SlotType SlotType { get; }
+        public Enum SlotType { get; }
 
         public EquipableItemStub() =>
-            SlotType = SlotType.Chest;
+            SlotType = SlotTypes.Chest;
 
-        public EquipableItemStub(Weight weight) =>
+        public EquipableItemStub(Weight weight) : this() =>
             Weight = weight;
 
-        public EquipableItemStub(SlotType slotType) =>
+        public EquipableItemStub(Enum slotType) =>
             SlotType = slotType;
     }
 }
