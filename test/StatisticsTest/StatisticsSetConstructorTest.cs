@@ -5,7 +5,7 @@ using Ares.Statistics.Base;
 using Ares.StatisticsTest.DummyObjects;
 using Xunit;
 
-namespace StatisticsTest
+namespace Ares.StatisticsTest
 {
     public class StatisticsSetConstructorTest
     {
