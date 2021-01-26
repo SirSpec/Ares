@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Ares.Inventory;
+using Ares.Inventory.Implementations;
 using Ares.InventoryTest.Stubs;
 using Xunit;
 
@@ -7,11 +9,35 @@ namespace Ares.InventoryTest
 {
     public class EquipmentTest
     {
+        private IList<Slot> ValidSlots => new List<Slot> {
+            new Slot(SlotType.Boots),
+            new Slot(SlotType.Chest),
+            new Slot(SlotType.Gloves),
+            new Slot(SlotType.Helmet),
+            new Slot(SlotType.MainHand),
+            new Slot(SlotType.OffHand)
+        };
+
+        private IList<Slot> InvalidSlots => new List<Slot> {
+            new Slot(SlotType.Boots),
+            new Slot(SlotType.Boots)
+        };
+
+        [Fact]
+        public void Constructor_DuplicatedSlotType_ThrowArgumentException()
+        {
+            //Arrange Act
+            Action action = () => new Equipment(InvalidSlots);
+
+            //Assert
+            Assert.Throws<ArgumentException>(action);
+        }
+
         [Fact]
         public void Weight_Empty_Zero()
         {
             //Arrange
-            var sut = new Equipment();
+            var sut = new Equipment(ValidSlots);
 
             //Assert
             Assert.Equal(Weight.Zero, sut.Weight);
@@ -21,7 +47,7 @@ namespace Ares.InventoryTest
         public void Equip_ValidItem_ItemSet()
         {
             //Arrange
-            var sut = new Equipment();
+            var sut = new Equipment(ValidSlots);
             var testItem = new EquipableItemStub();
 
             //Act
@@ -36,7 +62,7 @@ namespace Ares.InventoryTest
         public void Equip_TheSameItemType_ReplaceItem()
         {
             //Arrange
-            var sut = new Equipment();
+            var sut = new Equipment(ValidSlots);
             var testItem1 = new EquipableItemStub(SlotType.Boots);
             var testItem2 = new EquipableItemStub(SlotType.Boots);
 
@@ -54,7 +80,7 @@ namespace Ares.InventoryTest
         public void EquipedEvent_ValidItem_NewItemEventTriggered()
         {
             //Arrange
-            var sut = new Equipment();
+            var sut = new Equipment(ValidSlots);
             var testItem = new EquipableItemStub(SlotType.Boots);
 
             //Act
@@ -71,7 +97,7 @@ namespace Ares.InventoryTest
         public void EquipedEvent_TheSameItemType_ReplaceItemEventTriggered()
         {
             //Arrange
-            var sut = new Equipment();
+            var sut = new Equipment(ValidSlots);
             var testItem1 = new EquipableItemStub(SlotType.Boots);
             var testItem2 = new EquipableItemStub(SlotType.Boots);
 
@@ -90,7 +116,7 @@ namespace Ares.InventoryTest
         public void Weight_MultipleItems_SumOfItemsWeight()
         {
             //Arrange
-            var sut = new Equipment();
+            var sut = new Equipment(ValidSlots);
             var testItem1 = new EquipableItemStub(SlotType.Chest);
             var testItem2 = new EquipableItemStub(SlotType.Boots);
 

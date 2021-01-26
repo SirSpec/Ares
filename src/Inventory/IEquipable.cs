@@ -1,7 +1,9 @@
-﻿namespace Ares.Inventory
+﻿using System;
+
+namespace Ares.Inventory
 {
     public interface IEquipable : IItem
     {
-        SlotType SlotType { get; }
+        Enum SlotType { get; }
     }
 }

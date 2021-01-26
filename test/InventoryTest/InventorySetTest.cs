@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Ares.Inventory;
+using Ares.Inventory.Implementations;
 using Ares.InventoryTest.Stubs;
 using Xunit;
 
@@ -7,12 +9,21 @@ namespace Ares.InventoryTest
 {
     public class InventorySetTest
     {
+        private IList<Slot> ValidSlots => new List<Slot> {
+            new Slot(SlotType.Boots),
+            new Slot(SlotType.Chest),
+            new Slot(SlotType.Gloves),
+            new Slot(SlotType.Helmet),
+            new Slot(SlotType.MainHand),
+            new Slot(SlotType.OffHand)
+        };
+
         [Fact]
         public void Default_NewObject_DefaultValues()
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
 
             //Assert
             Assert.Equal(Weight.Zero, sut.Weight);
@@ -26,7 +37,7 @@ namespace Ares.InventoryTest
             //Arrange
             var carryingCapacity = new Weight(5);
             var newCapacity = new Weight(10);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
 
             //Act
             sut.ChangeCarryingCapacity(newCapacity);
@@ -40,7 +51,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(3));
 
             //Act
@@ -56,7 +67,7 @@ namespace Ares.InventoryTest
             //Arrange
             var carryingCapacity = new Weight(5);
             var newCapacity = new Weight(3);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(4));
 
             //Act
@@ -72,7 +83,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var gold = new Gold(5);
 
             //Act
@@ -87,7 +98,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var earnedGold = new Gold(5);
             var spentGold = new Gold(3);
 
@@ -104,7 +115,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var spentGold = new Gold(1);
 
             //Act
@@ -119,7 +130,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(5));
 
             //Act
@@ -134,7 +145,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(6));
 
             //Act
@@ -149,7 +160,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(5));
 
             //Act
@@ -164,7 +175,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(6));
 
             //Act
@@ -179,7 +190,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub();
 
             //Act
@@ -194,7 +205,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(3));
 
             //Act
@@ -210,7 +221,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(3));
 
             //Act
@@ -227,7 +238,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var carryingCapacity = new Weight(5);
-            var sut = new InventorySet(new Equipment(), new Backpack(3), carryingCapacity);
+            var sut = new InventorySet(new Equipment(ValidSlots), new Backpack(3), carryingCapacity);
             var testItem = new EquipableItemStub(new Weight(3));
 
             //Act
