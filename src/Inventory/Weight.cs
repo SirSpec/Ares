@@ -8,13 +8,10 @@ namespace Ares.Inventory
         public int Value { get; }
         public static Weight Zero => new Weight(Minimum);
 
-        public Weight(int value)
-        {
-            if (value < Minimum)
-                throw new ArgumentException($"{nameof(value)}:{value} cannot be less than {Minimum}.");
-
-            Value = value;
-        }
+        public Weight(int value) =>
+            Value = value >= Minimum
+                ? value
+                : throw new ArgumentException($"{nameof(value)}:{value} cannot be less than {Minimum}.");
 
         public static Weight operator +(Weight left, Weight right) =>
             new Weight(left.Value + right.Value);

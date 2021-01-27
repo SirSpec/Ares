@@ -1,4 +1,4 @@
-using Ares.Statistics.Base;
+using Ares.Statistics;
 
 namespace Ares.StatisticsTest.DummyObjects
 {

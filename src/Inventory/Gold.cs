@@ -9,13 +9,10 @@ namespace Ares.Inventory
         public int Value { get; }
         public static Gold Zero => new Gold(Minimum);
 
-        public Gold(int value)
-        {
-            if (value < Minimum)
-                throw new ArgumentException($"{nameof(value)}:{value} cannot be less than {Minimum}.");
-
-            Value = value;
-        }
+        public Gold(int value) =>
+            Value = value >= Minimum
+                ? value
+                : throw new ArgumentException($"{nameof(value)}:{value} cannot be less than {Minimum}.");
 
         public static Gold operator +(Gold left, Gold right) =>
             new Gold(left.Value + right.Value);

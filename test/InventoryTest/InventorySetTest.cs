@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Ares.Inventory;
-using Ares.Inventory.Implementations;
 using Ares.InventoryTest.Stubs;
 using Xunit;
 
@@ -10,12 +9,12 @@ namespace Ares.InventoryTest
     public class InventorySetTest
     {
         private IList<Slot> ValidSlots => new List<Slot> {
-            new Slot(SlotType.Boots),
-            new Slot(SlotType.Chest),
-            new Slot(SlotType.Gloves),
-            new Slot(SlotType.Helmet),
-            new Slot(SlotType.MainHand),
-            new Slot(SlotType.OffHand)
+            new Slot(SlotTypeStub.Slot1),
+            new Slot(SlotTypeStub.Slot2),
+            new Slot(SlotTypeStub.Slot3),
+            new Slot(SlotTypeStub.Slot4),
+            new Slot(SlotTypeStub.Slot5),
+            new Slot(SlotTypeStub.Slot6)
         };
 
         [Fact]

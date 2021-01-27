@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using Ares.Statistics.Base;
-using Ares.Statistics.Enhancements;
+using Ares.Statistics;
 
 namespace Ares.StatisticsTest.Stubs
 {

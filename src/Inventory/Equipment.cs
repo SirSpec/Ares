@@ -9,12 +9,13 @@ namespace Ares.Inventory
         public event EventHandler<EquipedEventArgs>? Equiped;
 
         private readonly IList<Slot> slots;
-        public IEnumerable<IEquipable> EquipedItems => slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item);
+        public IEnumerable<IEquipable> EquipedItems =>
+            slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item);
 
         public Equipment(IList<Slot> slots) =>
-            this.slots = ContainsDuplicatedTypes(slots)
-                ? throw new ArgumentException($"{nameof(slots)} contains duplicated slot type.")
-                : slots;
+            this.slots = DoesNotContainDuplicatedTypes(slots)
+                ? slots
+                : throw new ArgumentException($"{nameof(slots)} contains duplicated slot type.");
 
         public void Equip(IEquipable item)
         {
@@ -36,13 +37,13 @@ namespace Ares.Inventory
         public Weight Weight =>
             EquipedItems.Aggregate(Weight.Zero, (seed, next) => seed += next.Weight);
 
-        private static bool ContainsDuplicatedTypes(IEnumerable<Slot> slots)
+        private static bool DoesNotContainDuplicatedTypes(IEnumerable<Slot> slots)
         {
             var numberOfDuplicatedTypes = slots
                 .GroupBy(slot => slot.SlotType)
                 .Count(group => group.Count() > 1);
 
-            return numberOfDuplicatedTypes != 0;
+            return numberOfDuplicatedTypes == 0;
         }
     }
 }
