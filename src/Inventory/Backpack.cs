@@ -16,10 +16,11 @@ namespace Ares.Inventory
 
         public Backpack(int capacity)
         {
-            if (capacity < MinimumCapacity)
-                throw new ArgumentException($"{nameof(capacity)}:{capacity} cannot be less than {MinimumCapacity}.");
+            Capacity = capacity >= MinimumCapacity
+                ? capacity
+                : throw new ArgumentException($"{nameof(capacity)}:{capacity} cannot be less than {MinimumCapacity}.");
 
-            (items, Capacity) = (new List<IItem>(), capacity);
+            items = new List<IItem>();
         }
 
         public bool Contains(IItem item) =>

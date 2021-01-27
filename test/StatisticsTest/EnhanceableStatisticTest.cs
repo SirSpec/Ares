@@ -1,5 +1,5 @@
 using System;
-using Ares.Statistics.Base;
+using Ares.Statistics;
 using Ares.StatisticsTest.Stubs;
 using Xunit;
 

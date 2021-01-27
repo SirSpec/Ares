@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Ares.Inventory;
-using Ares.Inventory.Implementations;
 using Ares.InventoryTest.Stubs;
 using Xunit;
 
@@ -10,21 +9,21 @@ namespace Ares.InventoryTest
     public class EquipmentTest
     {
         private IList<Slot> ValidSlots => new List<Slot> {
-            new Slot(SlotType.Boots),
-            new Slot(SlotType.Chest),
-            new Slot(SlotType.Gloves),
-            new Slot(SlotType.Helmet),
-            new Slot(SlotType.MainHand),
-            new Slot(SlotType.OffHand)
+            new Slot(SlotTypeStub.Slot1),
+            new Slot(SlotTypeStub.Slot2),
+            new Slot(SlotTypeStub.Slot3),
+            new Slot(SlotTypeStub.Slot4),
+            new Slot(SlotTypeStub.Slot5),
+            new Slot(SlotTypeStub.Slot6)
         };
 
         private IList<Slot> InvalidSlots => new List<Slot> {
-            new Slot(SlotType.Boots),
-            new Slot(SlotType.Boots)
+            new Slot(SlotTypeStub.Slot1),
+            new Slot(SlotTypeStub.Slot1)
         };
 
         [Fact]
-        public void Constructor_DuplicatedSlotType_ThrowArgumentException()
+        public void Constructor_DuplicatedSlotTypeStub_ThrowArgumentException()
         {
             //Arrange Act
             Action action = () => new Equipment(InvalidSlots);
@@ -63,8 +62,8 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Equipment(ValidSlots);
-            var testItem1 = new EquipableItemStub(SlotType.Boots);
-            var testItem2 = new EquipableItemStub(SlotType.Boots);
+            var testItem1 = new EquipableItemStub(SlotTypeStub.Slot1);
+            var testItem2 = new EquipableItemStub(SlotTypeStub.Slot1);
 
             //Act
             sut.Equip(testItem1);
@@ -81,7 +80,7 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Equipment(ValidSlots);
-            var testItem = new EquipableItemStub(SlotType.Boots);
+            var testItem = new EquipableItemStub(SlotTypeStub.Slot1);
 
             //Act
             Action action = () => sut.Equip(testItem);
@@ -98,8 +97,8 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Equipment(ValidSlots);
-            var testItem1 = new EquipableItemStub(SlotType.Boots);
-            var testItem2 = new EquipableItemStub(SlotType.Boots);
+            var testItem1 = new EquipableItemStub(SlotTypeStub.Slot1);
+            var testItem2 = new EquipableItemStub(SlotTypeStub.Slot1);
 
             //Act
             sut.Equip(testItem1);
@@ -117,8 +116,8 @@ namespace Ares.InventoryTest
         {
             //Arrange
             var sut = new Equipment(ValidSlots);
-            var testItem1 = new EquipableItemStub(SlotType.Chest);
-            var testItem2 = new EquipableItemStub(SlotType.Boots);
+            var testItem1 = new EquipableItemStub(SlotTypeStub.Slot2);
+            var testItem2 = new EquipableItemStub(SlotTypeStub.Slot1);
 
             //Act
             sut.Equip(testItem1);

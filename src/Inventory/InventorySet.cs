@@ -14,20 +14,19 @@ namespace Ares.Inventory
         public InventorySet(Equipment equipment, Backpack backpack, Weight carryingCapacity) =>
             (Equipment, Backpack, CarryingCapacity) = (equipment, backpack, carryingCapacity);
 
-        public void ChangeCarryingCapacity(Weight carryingCapacity)
-        {
-            if (carryingCapacity.Value >= Weight.Value) CarryingCapacity = carryingCapacity;
-            else throw new InvalidOperationException($"{nameof(carryingCapacity)}:{carryingCapacity} is smaller than Weight of items:{Weight}.");
-        }
+        public void ChangeCarryingCapacity(Weight carryingCapacity) =>
+            CarryingCapacity = carryingCapacity.Value >= Weight.Value
+                ? carryingCapacity
+                : throw new InvalidOperationException(
+                    $"{nameof(carryingCapacity)}:{carryingCapacity} is smaller than Weight of items:{Weight}.");
 
         public void Earn(Gold gold) =>
             Gold += gold;
 
-        public void Spend(Gold gold)
-        {
-            if (Gold.Value - gold.Value >= 0) Gold -= gold;
-            else throw new InvalidOperationException($"Not enough gold: {Gold}.");
-        }
+        public void Spend(Gold gold) =>
+            Gold -= Gold.Value - gold.Value >= 0
+                ? gold
+                : throw new InvalidOperationException($"Not enough gold: {Gold}.");
 
         public bool CanPickUp(IItem item) =>
             Weight + item.Weight <= CarryingCapacity && !Backpack.IsFull;
@@ -35,7 +34,8 @@ namespace Ares.Inventory
         public void PickUp(IItem item)
         {
             if (CanPickUp(item)) Backpack.Put(item);
-            else throw new InvalidOperationException($"Item Weight:{Weight} exceeds Carrying Capacity:{CarryingCapacity}.");
+            else throw new InvalidOperationException(
+                $"Item Weight:{Weight} exceeds Carrying Capacity:{CarryingCapacity}.");
         }
 
         public void RemoveItem(IItem item)

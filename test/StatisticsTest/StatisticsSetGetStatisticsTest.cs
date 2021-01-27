@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ares.Statistics;
-using Ares.Statistics.Base;
 using Ares.StatisticsTest.DummyObjects;
 using Ares.StatisticsTest.Stubs;
 using Xunit;

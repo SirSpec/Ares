@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ares.Statistics.Base;
-using Ares.Statistics.Enhancements;
 
 namespace Ares.Statistics
 {
@@ -10,21 +8,16 @@ namespace Ares.Statistics
     {
         private readonly IEnumerable<IStatistic> statistics;
 
-        public StatisticsSet(IEnumerable<IStatistic> statistics)
-        {
-            if (ContainsDuplicatedTypes(statistics))
-                throw new ArgumentException("Collection contains duplicated types of statistics.");
-
-            this.statistics = statistics;
-        }
+        public StatisticsSet(IEnumerable<IStatistic> statistics) =>
+            this.statistics = DoesNotContainDuplicatedTypes(statistics)
+                ? statistics
+                : throw new ArgumentException($"{nameof(statistics)} contains duplicated types of statistics.");
 
         public IEnumerable<TStatistic> GetStatistics<TStatistic>() where TStatistic : IStatistic =>
-            FindStatistics(typeof(TStatistic))
-                .Select(statistic => (TStatistic)statistic);
+            FindStatistics(typeof(TStatistic)).Select(statistic => (TStatistic)statistic);
 
         public TStatistic GetStatistic<TStatistic>() where TStatistic : IStatistic =>
-            (TStatistic)FindStatistics(typeof(TStatistic))
-                .Single();
+            (TStatistic)FindStatistics(typeof(TStatistic)).Single();
 
         public void Apply(params IEnhancement<IStatistic>[] enhancements)
         {
@@ -35,7 +28,7 @@ namespace Ares.Statistics
 
                 if (enhanceableStatistic is not null)
                     enhanceableStatistic.AddEnhancement(enhancement);
-                else throw new InvalidOperationException();
+                else throw new InvalidOperationException($"{enhanceableStatistic} is not {nameof(IEnhanceable)} type");
             }
         }
 
@@ -48,20 +41,20 @@ namespace Ares.Statistics
 
                 if (enhanceableStatistic is not null)
                     enhanceableStatistic.RemoveEnhancement(enhancement);
-                else throw new InvalidOperationException();
+                else throw new InvalidOperationException($"{enhanceableStatistic} is not {nameof(IEnhanceable)} type");
             }
         }
 
         private IEnumerable<IStatistic> FindStatistics(Type type) =>
             statistics.Where(statistic => type.IsAssignableFrom(statistic.GetType()));
 
-        private static bool ContainsDuplicatedTypes(IEnumerable<IStatistic> statistics)
+        private static bool DoesNotContainDuplicatedTypes(IEnumerable<IStatistic> statistics)
         {
             var numberOfDuplicatedTypes = statistics
                 .GroupBy(statistic => statistic.GetType())
                 .Count(group => group.Count() > 1);
 
-            return numberOfDuplicatedTypes != 0;
+            return numberOfDuplicatedTypes == 0;
         }
     }
 }

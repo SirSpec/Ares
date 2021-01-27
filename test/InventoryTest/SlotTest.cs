@@ -1,6 +1,5 @@
 using System;
 using Ares.Inventory;
-using Ares.Inventory.Implementations;
 using Ares.InventoryTest.Stubs;
 using Xunit;
 
@@ -12,7 +11,7 @@ namespace Ares.InventoryTest
         public void Constructor_IsEmpty_True()
         {
             //Arrange
-            var sut = new Slot(SlotType.Chest);
+            var sut = new Slot(SlotTypeStub.Slot1);
 
             //Assert
             Assert.True(sut.IsEmpty);
@@ -22,7 +21,7 @@ namespace Ares.InventoryTest
         public void ItemGetter_EmptySlot_ThrowsInvalidOperationException()
         {
             //Arrange
-            var sut = new Slot(SlotType.Chest);
+            var sut = new Slot(SlotTypeStub.Slot1);
 
             // Act
             Func<IEquipable> action = () => sut.Item;
@@ -35,8 +34,8 @@ namespace Ares.InventoryTest
         public void ItemSetter_SetItemOfTheSameSlotType_Item()
         {
             //Arrange
-            var sut = new Slot(SlotType.Chest);
-            var item = new EquipableItemStub(SlotType.Chest);
+            var sut = new Slot(SlotTypeStub.Slot1);
+            var item = new EquipableItemStub(SlotTypeStub.Slot1);
 
             //Act
             sut.Item = item;
@@ -49,8 +48,8 @@ namespace Ares.InventoryTest
         public void ItemSetter_SetItemOfDifferentSlotType_ThrowsInvalidOperationException()
         {
             //Arrange
-            var sut = new Slot(SlotType.Chest);
-            var item = new EquipableItemStub(SlotType.Gloves);
+            var sut = new Slot(SlotTypeStub.Slot1);
+            var item = new EquipableItemStub(SlotTypeStub.Slot2);
 
             //Act
             Action action = () => sut.Item = item;
