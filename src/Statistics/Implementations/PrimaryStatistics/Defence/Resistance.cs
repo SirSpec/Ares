@@ -12,7 +12,7 @@ namespace Ares.Statistics.Implementations.PrimaryStatistics.Defence
 
         public abstract string Name { get; }
         public int BaseValue { get; } = Minimum;
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
         public int Value => EnhancementsValue <= Minimum
             ? Minimum
@@ -20,11 +20,11 @@ namespace Ares.Statistics.Implementations.PrimaryStatistics.Defence
                 ? Maximum
                 : EnhancementsValue;
 
-        public Resistance() : this(new List<IEnhancement>())
+        public Resistance() : this(new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public Resistance(IList<IEnhancement> enhancements) =>
+        public Resistance(IList<IEnhancement<IStatistic>> enhancements) =>
             Enhancements = enhancements;
 
         private int EnhancementsValue =>

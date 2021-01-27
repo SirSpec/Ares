@@ -15,15 +15,15 @@ namespace Ares.Statistics.Implementations.DerivedStatistics.Offence
 
         public abstract string Name { get; }
         public int BaseValue => baseValue * intelligence.Value;
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
         public int Value => BaseValue + EnhancementsValue;
 
-        public ElementalDamage(Intelligence intelligence) : this(Minimum, intelligence, new List<IEnhancement>())
+        public ElementalDamage(Intelligence intelligence) : this(Minimum, intelligence, new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public ElementalDamage(int baseValue, Intelligence intelligence, IList<IEnhancement> enhancements)
+        public ElementalDamage(int baseValue, Intelligence intelligence, IList<IEnhancement<IStatistic>> enhancements)
         {
             SetBaseValue(baseValue);
             this.intelligence = intelligence;

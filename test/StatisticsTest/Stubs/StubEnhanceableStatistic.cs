@@ -10,11 +10,11 @@ namespace Ares.StatisticsTest.Stubs
         public int BaseValue => throw new System.NotImplementedException();
         public int Value => throw new System.NotImplementedException();
 
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
         public StubEnhanceableStatistic()
         {
-            Enhancements = new List<IEnhancement>();
+            Enhancements = new List<IEnhancement<IStatistic>>();
         }
     }
 }

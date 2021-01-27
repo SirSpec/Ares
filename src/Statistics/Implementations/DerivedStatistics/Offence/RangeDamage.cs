@@ -15,15 +15,15 @@ namespace Ares.Statistics.Implementations.DerivedStatistics.Offence
 
         public string Name { get; } = "Range Damage";
         public int BaseValue => baseValue * dexterity.Value;
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
         public int Value => BaseValue + EnhancementsValue;
 
-        public RangeDamage(Dexterity dexterity) : this(Minimum, dexterity, new List<IEnhancement>())
+        public RangeDamage(Dexterity dexterity) : this(Minimum, dexterity, new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public RangeDamage(int baseValue, Dexterity dexterity, IList<IEnhancement> enhancements)
+        public RangeDamage(int baseValue, Dexterity dexterity, IList<IEnhancement<IStatistic>> enhancements)
         {
             SetBaseValue(baseValue);
             this.dexterity = dexterity;

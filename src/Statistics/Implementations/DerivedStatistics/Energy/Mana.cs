@@ -13,15 +13,15 @@ namespace Ares.Statistics.Implementations.DerivedStatistics.Energy
 
         public string Name { get; } = "Mana";
         public int BaseValue => ManaPerIntelligence * intelligence.Value;
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
         public int Value => BaseValue + Enhancements.Sum(enhancement => enhancement.Enhance(BaseValue));
 
-        public Mana(Intelligence intelligence) : this(intelligence, new List<IEnhancement>())
+        public Mana(Intelligence intelligence) : this(intelligence, new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public Mana(Intelligence intelligence, IList<IEnhancement> enhancements)
+        public Mana(Intelligence intelligence, IList<IEnhancement<IStatistic>> enhancements)
         {
             this.intelligence = intelligence;
             Enhancements = enhancements;
