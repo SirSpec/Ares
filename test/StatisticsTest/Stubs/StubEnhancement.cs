@@ -1,8 +1,9 @@
+using Ares.Statistics.Base;
 using Ares.Statistics.Enhancements;
 
 namespace Ares.StatisticsTest.Stubs
 {
-    public class StubEnhancement : IEnhancement
+    public class StubEnhancement : IEnhancement<IStatistic>
     {
         private readonly int value;
 

@@ -13,15 +13,15 @@ namespace Ares.Statistics.Implementations.DerivedStatistics.Energy
 
         public string Name { get; } = "Health";
         public int BaseValue => HealthPerStrength * strength.Value;
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
         public int Value => BaseValue + Enhancements.Sum(enhancement => enhancement.Enhance(BaseValue));
 
-        public Health(Strength strength) : this(strength, new List<IEnhancement>())
+        public Health(Strength strength) : this(strength, new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public Health(Strength strength, IList<IEnhancement> enhancements)
+        public Health(Strength strength, IList<IEnhancement<IStatistic>> enhancements)
         {
             this.strength = strength;
             Enhancements = enhancements;

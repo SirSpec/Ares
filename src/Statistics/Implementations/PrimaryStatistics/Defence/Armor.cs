@@ -14,13 +14,13 @@ namespace Ares.Statistics.Implementations.PrimaryStatistics.Defence
         public string Name { get; } = "Armor";
         public int BaseValue => baseValue;
         public int Value => BaseValue + Enhancements.Sum(enhancement => enhancement.Enhance(BaseValue));
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
-        public Armor() : this(Minimum, new List<IEnhancement>())
+        public Armor() : this(Minimum, new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public Armor(int baseValue, IList<IEnhancement> enhancements)
+        public Armor(int baseValue, IList<IEnhancement<IStatistic>> enhancements)
         {
             SetBaseValue(baseValue);
             Enhancements = enhancements;

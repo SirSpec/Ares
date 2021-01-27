@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ares.Statistics.Base;
+using Ares.Statistics.Enhancements;
 
 namespace Ares.Statistics
 {
@@ -24,6 +25,32 @@ namespace Ares.Statistics
         public TStatistic GetStatistic<TStatistic>() where TStatistic : IStatistic =>
             (TStatistic)FindStatistics(typeof(TStatistic))
                 .Single();
+
+        public void Apply(params IEnhancement<IStatistic>[] enhancements)
+        {
+            foreach (var enhancement in enhancements)
+            {
+                var statisticType = enhancement.GetType().GenericTypeArguments.Single();
+                var enhanceableStatistic = FindStatistics(statisticType).Single() as IEnhanceable;
+
+                if (enhanceableStatistic is not null)
+                    enhanceableStatistic.AddEnhancement(enhancement);
+                else throw new InvalidOperationException();
+            }
+        }
+
+        public void Remove(params IEnhancement<IStatistic>[] enhancements)
+        {
+            foreach (var enhancement in enhancements)
+            {
+                var statisticType = enhancement.GetType().GenericTypeArguments.Single();
+                var enhanceableStatistic = FindStatistics(statisticType).Single() as IEnhanceable;
+
+                if (enhanceableStatistic is not null)
+                    enhanceableStatistic.RemoveEnhancement(enhancement);
+                else throw new InvalidOperationException();
+            }
+        }
 
         private IEnumerable<IStatistic> FindStatistics(Type type) =>
             statistics.Where(statistic => type.IsAssignableFrom(statistic.GetType()));

@@ -15,15 +15,15 @@ namespace Ares.Statistics.Implementations.DerivedStatistics.Offence
 
         public string Name { get; } = "Melee Damage";
         public int BaseValue => baseValue * strength.Value;
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
         public int Value => BaseValue + EnhancementsValue;
 
-        public MeleeDamage(Strength strength) : this(Minimum, strength, new List<IEnhancement>())
+        public MeleeDamage(Strength strength) : this(Minimum, strength, new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public MeleeDamage(int baseValue, Strength strength, IList<IEnhancement> enhancements)
+        public MeleeDamage(int baseValue, Strength strength, IList<IEnhancement<IStatistic>> enhancements)
         {
             SetBaseValue(baseValue);
             this.strength = strength;

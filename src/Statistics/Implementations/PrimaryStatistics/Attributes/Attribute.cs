@@ -15,13 +15,13 @@ namespace Ares.Statistics.Implementations.PrimaryStatistics.Attributes
 
         public int BaseValue => baseValue;
         public int Value => BaseValue + Enhancements.Sum(Enhancement => Enhancement.Enhance(BaseValue));
-        public IList<IEnhancement> Enhancements { get; }
+        public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
-        public Attribute() : this(Minimum, new List<IEnhancement>())
+        public Attribute() : this(Minimum, new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public Attribute(int baseValue, IList<IEnhancement> enhancements)
+        public Attribute(int baseValue, IList<IEnhancement<IStatistic>> enhancements)
         {
             SetBaseValue(baseValue);
             Enhancements = enhancements;
