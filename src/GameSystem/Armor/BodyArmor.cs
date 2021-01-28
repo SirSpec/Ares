@@ -15,7 +15,7 @@ namespace GameSystem.Armor
 
         public BodyArmor(
             string name,
-            Enum slotType,
+            SlotType slotType,
             Weight weight,
             ArmorValue armor,
             IEnumerable<IEnhancement<IStatistic>> enhancements)
