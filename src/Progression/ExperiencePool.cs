@@ -15,10 +15,11 @@ namespace Ares.Progression
 
         public ExperiencePool(int points)
         {
-            if (points < Minimum || points > Maximum)
-                throw new ArgumentException($"{nameof(points)}:{points} is not within the range {Minimum} - {Maximum}.");
+            Points = points >= Minimum && points <= Maximum
+                ? points
+                : throw new ArgumentException($"{nameof(points)}:{points} is not within the range {Minimum} - {Maximum}.");
 
-            (Points, Level) = (points, CalculateLevel(points));
+            Level = CalculateLevel(points);
         }
 
         public void Gain(int points)
