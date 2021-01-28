@@ -15,7 +15,7 @@ namespace GameSystem.Weapons
 
         public Weapon(
             string name,
-            Enum slotType,
+            SlotType slotType,
             Weight weight,
             DamageDealt damage,
             IEnumerable<IEnhancement<IStatistic>> enhancements)
