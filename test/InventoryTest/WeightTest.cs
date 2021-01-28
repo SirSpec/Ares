@@ -17,7 +17,7 @@ namespace Ares.InventoryTest
         }
 
         [Fact]
-        public void AddOperator_Add5And10_15()
+        public void AddOperator_Add_SumOfBothWeights()
         {
             //Arrange
             var sut1 = new Weight(5);
@@ -31,7 +31,7 @@ namespace Ares.InventoryTest
         }
 
         [Fact]
-        public void SubtractOperator_Subtract10And5_Five()
+        public void SubtractOperator_SubtractLesserFromGreater_ValidWeight()
         {
             //Arrange
             var sut1 = new Weight(10);
@@ -45,7 +45,7 @@ namespace Ares.InventoryTest
         }
 
         [Fact]
-        public void SubtractOperator_Subtract10And10_Zero()
+        public void SubtractOperator_SubtractEqualWeights_Zero()
         {
             //Arrange
             var sut1 = new Weight(10);
@@ -59,7 +59,7 @@ namespace Ares.InventoryTest
         }
 
         [Fact]
-        public void SmallerOrEqualOperator_10And10_True()
+        public void SmallerOrEqualOperator_TheSameWeights_True()
         {
             //Arrange
             var sut1 = new Weight(10);
@@ -73,7 +73,7 @@ namespace Ares.InventoryTest
         }
 
         [Fact]
-        public void SmallerOrEqualOperator_15And10_False()
+        public void SmallerOrEqualOperator_GreaterAndSmaller_False()
         {
             //Arrange
             var sut1 = new Weight(15);
@@ -87,7 +87,7 @@ namespace Ares.InventoryTest
         }
 
         [Fact]
-        public void GreaterOrEqualOperator_10And10_True()
+        public void GreaterOrEqualOperator_TheSameWeights_True()
         {
             //Arrange
             var sut1 = new Weight(10);
@@ -101,7 +101,7 @@ namespace Ares.InventoryTest
         }
 
         [Fact]
-        public void GreaterOrEqualOperator_5And10_False()
+        public void GreaterOrEqualOperator_SmallerAndGreater_False()
         {
             //Arrange
             var sut1 = new Weight(5);

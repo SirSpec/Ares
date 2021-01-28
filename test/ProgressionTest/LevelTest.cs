@@ -10,7 +10,7 @@ namespace Ares.ProgressionTest
         public void Constructor_InputBelowMinimumLevel_ThrowsArgumentException()
         {
             //Arrange Act
-            Action sut = () => new Level(0);
+            Action sut = () => new Level(Level.Minimum - 1);
 
             //Assert
             Assert.Throws<ArgumentException>(sut);
