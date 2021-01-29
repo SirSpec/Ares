@@ -8,18 +8,18 @@ namespace Ares.Inventory
     {
         public event EventHandler<EquipedEventArgs>? Equiped;
 
-        private readonly IList<Slot> slots;
+        public IList<Slot> Slots { get; }
         public IEnumerable<IEquipable> EquipedItems =>
-            slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item);
+            Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item);
 
         public Equipment(IList<Slot> slots) =>
-            this.slots = DoesNotContainDuplicatedTypes(slots)
+            Slots = DoesNotContainDuplicatedTypes(slots)
                 ? slots
                 : throw new ArgumentException($"{nameof(slots)} contains duplicated slot type.");
 
         public void Equip(IEquipable item)
         {
-            var slot = slots.Single(slot => slot.SlotType.Equals(item.SlotType));
+            var slot = Slots.Single(slot => slot.SlotType.Equals(item.SlotType));
 
             if (slot.IsEmpty)
             {
