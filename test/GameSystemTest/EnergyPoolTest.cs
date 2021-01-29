@@ -54,6 +54,19 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
+        public void Increase_NegativeInput_ThrowArgumentException()
+        {
+            //Arrange
+            var sut = new EnergyPool(1, 1);
+
+            //Act
+            Action action = () => sut.Increase(-1);
+
+            //Assert
+            Assert.Throws<ArgumentException>(action);
+        }
+
+        [Fact]
         public void Decrease_ExceedZero_Zero()
         {
             //Arrange
@@ -66,6 +79,19 @@ namespace Ares.GameSystemTest
             //Assert
             Assert.Equal(0, sut.Current);
             Assert.Equal(total, sut.Total);
+        }
+
+        [Fact]
+        public void Decrease_NegativeInput_ThrowArgumentException()
+        {
+            //Arrange
+            var sut = new EnergyPool(1, 1);
+
+            //Act
+            Action action = () => sut.Decrease(-1);
+
+            //Assert
+            Assert.Throws<ArgumentException>(action);
         }
     }
 }

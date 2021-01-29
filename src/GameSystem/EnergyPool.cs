@@ -20,13 +20,17 @@ namespace GameSystem
                 : (current, total);
 
         public void Increase(int value) =>
-            Current = Current + value >= Total
-                ? Total
-                : Current + value;
+            Current = value > Minimum
+                ? Current + value >= Total
+                    ? Total
+                    : Current + value
+                : throw new ArgumentException($"{nameof(value)}:{value} cannot be negative.");
 
         public void Decrease(int value) =>
-            Current = Current - value <= Minimum
-                ? Minimum
-                : Current - value;
+            Current = value > Minimum
+                ? Current - value <= Minimum
+                    ? Minimum
+                    : Current - value
+                : throw new ArgumentException($"{nameof(value)}:{value} cannot be negative.");
     }
 }
