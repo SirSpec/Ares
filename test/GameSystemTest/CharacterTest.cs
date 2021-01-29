@@ -6,15 +6,39 @@ using Ares.Inventory;
 using Ares.Statistics;
 using GameSystem;
 using GameSystem.Defence;
+using GameSystem.Statistics.DerivedStatistics.Offence;
 using GameSystem.Statistics.PrimaryStatistics.Defence;
 using GameSystem.Weapons;
 using Xunit;
 
 namespace Ares.GameSystemTest
 {
-    public class CharacterTest
+    public static class TestCharacterFactory
     {
-        public Weapon GetSword()
+        public static Character GetCharacterWithBodyArmor()
+        {
+            var character = new Character("JohnDoe");
+
+            var helmet = GetHelmet();
+            character.Inventory.PickUp(helmet);
+            character.Inventory.Equip(helmet);
+
+            var chest = GetChest();
+            character.Inventory.PickUp(chest);
+            character.Inventory.Equip(chest);
+
+            var gloves = GetGloves();
+            character.Inventory.PickUp(gloves);
+            character.Inventory.Equip(gloves);
+
+            var boots = GetBoots();
+            character.Inventory.PickUp(boots);
+            character.Inventory.Equip(boots);
+
+            return character;
+        }
+
+        public static Weapon GetSword()
         {
             return new Weapon(
                 "Sword",
@@ -24,7 +48,7 @@ namespace Ares.GameSystemTest
                 new List<IEnhancement<IStatistic>>());
         }
 
-        public Weapon GetAxe()
+        public static Weapon GetAxe()
         {
             return new Weapon(
                 "Axe",
@@ -34,7 +58,7 @@ namespace Ares.GameSystemTest
                 new List<IEnhancement<IStatistic>>());
         }
 
-        public BodyArmor GetChest()
+        public static BodyArmor GetChest()
         {
             return new BodyArmor(
                 "Chest",
@@ -44,7 +68,7 @@ namespace Ares.GameSystemTest
                 new List<IEnhancement<IStatistic>>());
         }
 
-        public BodyArmor GetBoots()
+        public static BodyArmor GetBoots()
         {
             return new BodyArmor(
                 "Boots",
@@ -54,7 +78,7 @@ namespace Ares.GameSystemTest
                 new List<IEnhancement<IStatistic>>());
         }
 
-        public BodyArmor GetGloves()
+        public static BodyArmor GetGloves()
         {
             return new BodyArmor(
                 "Gloves",
@@ -64,7 +88,7 @@ namespace Ares.GameSystemTest
                 new List<IEnhancement<IStatistic>>());
         }
 
-        public BodyArmor GetHelmet()
+        public static BodyArmor GetHelmet()
         {
             return new BodyArmor(
                 "Helmet",
@@ -73,50 +97,138 @@ namespace Ares.GameSystemTest
                 new ArmorValue(1),
                 new List<IEnhancement<IStatistic>>());
         }
+    }
 
+    public class CharacterTest
+    {
         [Fact]
-        public void SetBaseValue_Negative_ThrowsArgumentException()
+        public void IsUnarmed_Default_True()
         {
             //Arrange
-            var sut = new Character("John");
-            var s = GetSword();
-            sut.Inventory.PickUp(s);
-            sut.Inventory.Equip(s);
-
-            var h = GetHelmet();
-            sut.Inventory.PickUp(h);
-            sut.Inventory.Equip(h);
-
-            var c = GetChest();
-            sut.Inventory.PickUp(c);
-            sut.Inventory.Equip(c);
-
-            var g = GetGloves();
-            sut.Inventory.PickUp(g);
-            sut.Inventory.Equip(g);
-
-            var b = GetBoots();
-            sut.Inventory.PickUp(b);
-            sut.Inventory.Equip(b);
-
+            var sut = new Character("JohnDoe");
 
             //Act
+            var result = sut.IsUnarmed;
+
             //Assert
-            var orc = new Character("Orc");
-            var a = GetAxe();
-            orc.Inventory.PickUp(a);
-            orc.Inventory.Equip(a);
+            Assert.True(result);
+        }
 
-            var h1 = GetHelmet();
-            orc.Inventory.PickUp(h1);
-            orc.Inventory.Equip(h1);
+        [Fact]
+        public void IsUnarmed_EquipedWeapon_False()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+            var weapon = TestCharacterFactory.GetSword();
+            sut.Inventory.PickUp(weapon);
+            sut.Inventory.Equip(weapon);
 
-            var b1 = GetBoots();
-            orc.Inventory.PickUp(b1);
-            orc.Inventory.Equip(b1);
+            //Act
+            var result = sut.IsUnarmed;
 
-            var damage = sut.Attack();
-            orc.TakeDamage(damage);
+            //Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void SkillPoints_Default_One()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+
+            //Act
+            var result = sut.SkillPoints;
+
+            //Assert
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void SkillPoints_LevelUpToThirdLevel_Three()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+
+            //Act
+            sut.Experience.Gain(300);
+            var result = sut.SkillPoints;
+
+            //Assert
+            Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void SkillPoints_LevelUpTwice_Three()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+
+            //Act
+            sut.Experience.Gain(100);
+            sut.Experience.Gain(200);
+            var result = sut.SkillPoints;
+
+            //Assert
+            Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void IsDead_Default_False()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+
+            //Act
+            var result = sut.IsDead;
+
+            //Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsDead_HealthPoolEmpty_True()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+            sut.HealthPool.Decrease(sut.HealthPool.Current);
+
+            //Act
+            var result = sut.IsDead;
+
+            //Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void Armor_EquipedBodyArmor_SumOfArmor()
+        {
+            //Arrange
+            var sut = TestCharacterFactory.GetCharacterWithBodyArmor();
+
+            //Act
+            var result = sut.StatisticsSet.GetStatistic<Armor>().Value;
+            var expected = sut.Inventory.Equipment.EquipedItems
+                .Where(item => item is BodyArmor)
+                .Sum(item => ((BodyArmor)item).Armor.Value);
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void MeleeDamage_EquipedWeapon_WeaponDamage()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+            var weapon = TestCharacterFactory.GetSword();
+            sut.Inventory.PickUp(weapon);
+            sut.Inventory.Equip(weapon);
+
+            //Act
+            var result = sut.StatisticsSet.GetStatistic<MeleeDamage>().Value;
+
+            //Assert
+            Assert.Equal(weapon.Damage.Value, result);
         }
     }
 }
