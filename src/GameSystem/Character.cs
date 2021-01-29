@@ -26,7 +26,7 @@ namespace GameSystem
         public Character(string name)
         {
             Name = name;
-            SkillPoints = 0;
+            SkillPoints = 1;
 
             var strength = new Strength();
             var dexterity = new Dexterity();
@@ -73,50 +73,12 @@ namespace GameSystem
             ManaPool = new EnergyPool(StatisticsSet.GetStatistic<Intelligence>().Value);
         }
 
+        public bool IsDead => HealthPool.Current == 0;
+
         public bool IsUnarmed =>
             Inventory.Equipment.Slots
                 .Single(slot => slot.SlotType.Equals(SlotType.MainHand))
                 .IsEmpty;
-
-        public int GetArmor()
-        {
-            var items = Inventory.Equipment.EquipedItems.Where(item => item is BodyArmor);
-            return items.Select(item => (BodyArmor)item).Sum(bodyArmor => bodyArmor.Armor.Value);
-        }
-
-        public void OnEquiped(object? _, EquipedEventArgs args)
-        {
-            switch (args.NewItem)
-            {
-                case Weapon newWeapon:
-                    switch (newWeapon.Damage.Type)
-                    {
-                        case DamageType.Melee:
-                            StatisticsSet.GetStatistic<MeleeDamage>().SetBaseValue(newWeapon.Damage.Value);
-                            break;
-                        case DamageType.Range:
-                            StatisticsSet.GetStatistic<RangeDamage>().SetBaseValue(newWeapon.Damage.Value);
-                            break;
-                        case DamageType.Fire:
-                            StatisticsSet.GetStatistic<FireDamage>().SetBaseValue(newWeapon.Damage.Value);
-                            break;
-                        case DamageType.Ice:
-                            StatisticsSet.GetStatistic<IceDamage>().SetBaseValue(newWeapon.Damage.Value);
-                            break;
-                        case DamageType.Lightning:
-                            StatisticsSet.GetStatistic<LightningDamage>().SetBaseValue(newWeapon.Damage.Value);
-                            break;
-                        default:
-                            throw new ArgumentException();
-                    }
-                    break;
-                case BodyArmor:
-                    StatisticsSet.GetStatistic<Armor>().SetBaseValue(GetArmor());
-                    break;
-                default:
-                    throw new ArgumentException();
-            }
-        }
 
         public DamageDealt Attack()
         {
@@ -153,5 +115,45 @@ namespace GameSystem
 
         private void OnLeveledUpHandler(object? _, Level level) =>
             SkillPoints += level.Value - Experience.Level.Value;
+
+        private void OnEquiped(object? _, EquipedEventArgs args)
+        {
+            switch (args.NewItem)
+            {
+                case Weapon newWeapon:
+                    switch (newWeapon.Damage.Type)
+                    {
+                        case DamageType.Melee:
+                            StatisticsSet.GetStatistic<MeleeDamage>().SetBaseValue(newWeapon.Damage.Value);
+                            break;
+                        case DamageType.Range:
+                            StatisticsSet.GetStatistic<RangeDamage>().SetBaseValue(newWeapon.Damage.Value);
+                            break;
+                        case DamageType.Fire:
+                            StatisticsSet.GetStatistic<FireDamage>().SetBaseValue(newWeapon.Damage.Value);
+                            break;
+                        case DamageType.Ice:
+                            StatisticsSet.GetStatistic<IceDamage>().SetBaseValue(newWeapon.Damage.Value);
+                            break;
+                        case DamageType.Lightning:
+                            StatisticsSet.GetStatistic<LightningDamage>().SetBaseValue(newWeapon.Damage.Value);
+                            break;
+                        default:
+                            throw new ArgumentException();
+                    }
+                    break;
+                case BodyArmor:
+                    StatisticsSet.GetStatistic<Armor>().SetBaseValue(SumOfBodyArmorValue);
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        private int SumOfBodyArmorValue =>
+            Inventory.Equipment.EquipedItems
+                .Where(item => item is BodyArmor)
+                .Select(item => (BodyArmor)item)
+                .Sum(bodyArmor => bodyArmor.Armor.Value);
     }
 }
