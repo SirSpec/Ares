@@ -20,11 +20,15 @@ namespace GameSystem.Defence
             ArmorValue armor,
             IEnumerable<IEnhancement<IStatistic>> enhancements)
         {
-            Name = name;
-            SlotType = slotType;
-            Weight = weight;
-            Armor = armor;
-            Enhancements = enhancements;
+            if (slotType is not GameSystem.SlotType.MainHand)
+            {
+                Name = name;
+                SlotType = slotType;
+                Weight = weight;
+                Armor = armor;
+                Enhancements = enhancements;
+            }
+            else throw new ArgumentException($"{nameof(slotType)} cannot be {GameSystem.SlotType.MainHand}.");
         }
     }
 }
