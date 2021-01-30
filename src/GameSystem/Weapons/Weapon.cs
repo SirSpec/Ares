@@ -20,11 +20,16 @@ namespace GameSystem.Weapons
             DamageDealt damage,
             IEnumerable<IEnhancement<IStatistic>> enhancements)
         {
-            Name = name;
-            SlotType = slotType;
-            Weight = weight;
-            Damage = damage;
-            Enhancements = enhancements;
+            if (slotType is GameSystem.SlotType.MainHand or GameSystem.SlotType.OffHand)
+            {
+                Name = name;
+                SlotType = slotType;
+                Weight = weight;
+                Damage = damage;
+                Enhancements = enhancements;
+            }
+            else throw new ArgumentException(
+                $"{nameof(slotType)} must be {GameSystem.SlotType.MainHand} or {GameSystem.SlotType.OffHand}.");
         }
     }
 }
