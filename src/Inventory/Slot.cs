@@ -12,7 +12,7 @@ namespace Ares.Inventory
         public IEquipable Item
         {
             get => item ?? throw new InvalidOperationException($"{nameof(Slot)} is Empty.");
-            set => item = value.SlotType.Equals(SlotType)
+            set => item = value is null || value.SlotType.HasFlag(SlotType)
                 ? value
                 : throw new InvalidOperationException($"{nameof(SlotType)} of the Item:{value.SlotType} is invalid:{SlotType}.");
         }
