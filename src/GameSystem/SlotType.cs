@@ -1,12 +1,15 @@
-﻿namespace GameSystem
+﻿using System;
+
+namespace GameSystem
 {
+    [Flags]
     public enum SlotType
     {
-        Chest,
-        Boots,
-        Gloves,
-        Helmet,
-        MainHand,
-        OffHand
+        Helmet = 1,
+        Chest = 2,
+        MainHand = 4,
+        OffHand = 8,
+        Gloves = 16,
+        Boots = 32
     }
 }
