@@ -64,6 +64,7 @@ namespace GameSystem
                 }
             );
             equipment.Equiped += OnEquiped;
+            equipment.Unequiped += OnUnequiped;
             Inventory = new InventorySet(equipment, new Backpack(10), new Weight(10));
 
             Experience = new ExperiencePool(0);
@@ -114,16 +115,7 @@ namespace GameSystem
 
         private void OnEquiped(object? _, EquipedEventArgs args)
         {
-            if (args.OldItem is Weapon)
-            {
-                StatisticsSet.GetStatistic<MeleeDamage>().SetBaseValue(0);
-                StatisticsSet.GetStatistic<RangeDamage>().SetBaseValue(0);
-                StatisticsSet.GetStatistic<FireDamage>().SetBaseValue(0);
-                StatisticsSet.GetStatistic<IceDamage>().SetBaseValue(0);
-                StatisticsSet.GetStatistic<LightningDamage>().SetBaseValue(0);
-            }
-
-            switch (args.NewItem)
+            switch (args.EquipedItem)
             {
                 case Weapon newWeapon:
                     switch (newWeapon.Damage.Type)
@@ -152,6 +144,25 @@ namespace GameSystem
                     break;
                 default:
                     throw new ArgumentException($"Equiped item has to be {nameof(Weapon)} or {nameof(BodyArmor)}.");
+            }
+        }
+
+        private void OnUnequiped(object? _, UnequipedEventArgs args)
+        {
+            switch (args.UnequipedItem)
+            {
+                case Weapon:
+                    StatisticsSet.GetStatistic<MeleeDamage>().SetBaseValue(0);
+                    StatisticsSet.GetStatistic<RangeDamage>().SetBaseValue(0);
+                    StatisticsSet.GetStatistic<FireDamage>().SetBaseValue(0);
+                    StatisticsSet.GetStatistic<IceDamage>().SetBaseValue(0);
+                    StatisticsSet.GetStatistic<LightningDamage>().SetBaseValue(0);
+                    break;
+                case BodyArmor:
+                    StatisticsSet.GetStatistic<Armor>().SetBaseValue(SumOfBodyArmorValue);
+                    break;
+                default:
+                    throw new ArgumentException($"Unequiped item has to be {nameof(Weapon)} or {nameof(BodyArmor)}.");
             }
         }
 
