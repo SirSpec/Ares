@@ -24,10 +24,9 @@ namespace Ares.Inventory
 
         public void Equip(IEquipable item)
         {
-            var slots = Slots
-                .Where(slot => item.SlotType.HasFlag(slot.SlotType) && slot.IsEmpty);
+            var slots = Slots.Where(slot => item.SlotType.HasFlag(slot.SlotType));
 
-            if (slots.Any())
+            if (slots.All(slot => slot.IsEmpty))
             {
                 foreach (var slot in slots)
                     slot.Item = item;
