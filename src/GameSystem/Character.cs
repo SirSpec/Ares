@@ -80,23 +80,19 @@ namespace GameSystem
                 .Single(slot => slot.SlotType.Equals(SlotType.MainHand))
                 .IsEmpty;
 
-        public DamageDealt Attack()
-        {
-            var weapon = (Weapon)Inventory.Equipment.Slots.Single(slot => slot.SlotType.Equals(SlotType.MainHand)).Item;
-
-            return IsUnarmed
+        public DamageDealt Attack() =>
+            IsUnarmed
                 ? new DamageDealt(StatisticsSet.GetStatistic<MeleeDamage>().Value, DamageType.Melee)
                 : new DamageDealt(
-                    weapon.Damage.Type switch
+                    EquipedWeapon.Damage.Type switch
                     {
                         DamageType.Melee => StatisticsSet.GetStatistic<MeleeDamage>().Value,
                         DamageType.Range => StatisticsSet.GetStatistic<RangeDamage>().Value,
                         DamageType.Fire => StatisticsSet.GetStatistic<FireDamage>().Value,
                         DamageType.Ice => StatisticsSet.GetStatistic<IceDamage>().Value,
                         DamageType.Lightning => StatisticsSet.GetStatistic<LightningDamage>().Value,
-                        _ => throw new ArgumentException($"{nameof(DamageType)} is invalid: {weapon.Damage.Type}.")
-                    }, weapon.Damage.Type);
-        }
+                        _ => throw new ArgumentException($"{nameof(DamageType)} is invalid: {EquipedWeapon.Damage.Type}.")
+                    }, EquipedWeapon.Damage.Type);
 
         public void TakeDamage(DamageDealt damage)
         {
@@ -118,6 +114,15 @@ namespace GameSystem
 
         private void OnEquiped(object? _, EquipedEventArgs args)
         {
+            if (args.OldItem is Weapon)
+            {
+                StatisticsSet.GetStatistic<MeleeDamage>().SetBaseValue(0);
+                StatisticsSet.GetStatistic<RangeDamage>().SetBaseValue(0);
+                StatisticsSet.GetStatistic<FireDamage>().SetBaseValue(0);
+                StatisticsSet.GetStatistic<IceDamage>().SetBaseValue(0);
+                StatisticsSet.GetStatistic<LightningDamage>().SetBaseValue(0);
+            }
+
             switch (args.NewItem)
             {
                 case Weapon newWeapon:
@@ -139,14 +144,14 @@ namespace GameSystem
                             StatisticsSet.GetStatistic<LightningDamage>().SetBaseValue(newWeapon.Damage.Value);
                             break;
                         default:
-                            throw new ArgumentException();
+                            throw new ArgumentException($"Invalid {nameof(DamageType)}:{newWeapon.Damage.Type}.");
                     }
                     break;
                 case BodyArmor:
                     StatisticsSet.GetStatistic<Armor>().SetBaseValue(SumOfBodyArmorValue);
                     break;
                 default:
-                    throw new ArgumentException();
+                    throw new ArgumentException($"Equiped item has to be {nameof(Weapon)} or {nameof(BodyArmor)}.");
             }
         }
 
@@ -155,5 +160,9 @@ namespace GameSystem
                 .Where(item => item is BodyArmor)
                 .Select(item => (BodyArmor)item)
                 .Sum(bodyArmor => bodyArmor.Armor.Value);
+
+        private Weapon EquipedWeapon =>
+            (Weapon)Inventory.Equipment.EquipedItems
+                .Single(item => item is Weapon);
     }
 }
