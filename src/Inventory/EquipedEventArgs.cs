@@ -4,13 +4,9 @@ namespace Ares.Inventory
 {
     public class EquipedEventArgs : EventArgs
     {
-        public IEquipable? OldItem { get; }
-        public IEquipable? NewItem { get; }
+        public IEquipable EquipedItem { get; }
 
-        public EquipedEventArgs(IEquipable item) =>
-            NewItem = item;
-
-        public EquipedEventArgs(IEquipable oldItem, IEquipable newItem) =>
-            (OldItem, NewItem) = (oldItem, newItem);
+        public EquipedEventArgs(IEquipable equipedItem) =>
+            EquipedItem = equipedItem;
     }
 }

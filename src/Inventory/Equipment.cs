@@ -7,35 +7,48 @@ namespace Ares.Inventory
     public class Equipment
     {
         public event EventHandler<EquipedEventArgs>? Equiped;
-
-        public IList<Slot> Slots { get; }
-        public IEnumerable<IEquipable> EquipedItems =>
-            Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item);
+        public event EventHandler<UnequipedEventArgs>? Unequiped;
 
         public Equipment(IList<Slot> slots) =>
             Slots = DoesNotContainDuplicatedTypes(slots)
                 ? slots
                 : throw new ArgumentException($"{nameof(slots)} contains duplicated slot type.");
 
-        public void Equip(IEquipable item)
-        {
-            var slot = Slots.Single(slot => slot.SlotType.Equals(item.SlotType));
+        public IList<Slot> Slots { get; }
 
-            if (slot.IsEmpty)
-            {
-                slot.Item = item;
-                Equiped?.Invoke(this, new EquipedEventArgs(item));
-            }
-            else
-            {
-                var oldItem = slot.Item;
-                slot.Item = item;
-                Equiped?.Invoke(this, new EquipedEventArgs(oldItem, item));
-            }
-        }
+        public IEnumerable<IEquipable> EquipedItems =>
+            Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item).Distinct();
 
         public Weight Weight =>
             EquipedItems.Aggregate(Weight.Zero, (seed, next) => seed += next.Weight);
+
+        public void Equip(IEquipable item)
+        {
+            var slots = Slots
+                .Where(slot => item.SlotType.HasFlag(slot.SlotType) && slot.IsEmpty);
+
+            if (slots.Any())
+            {
+                foreach (var slot in slots)
+                    slot.Item = item;
+                Equiped?.Invoke(this, new EquipedEventArgs(item));
+            }
+            else throw new ArgumentException(
+                $"Could not find valid {nameof(Slot)}. " +
+                $"Invalid {nameof(item.SlotType)}:{item.SlotType} or {nameof(Slots)} already allocated.");
+        }
+
+        public void Unequip(IEquipable item)
+        {
+            if (EquipedItems.Contains(item))
+            {
+                var allocatedSlots = Slots.Where(slot => !slot.IsEmpty && slot.Item == item);
+                foreach (var slot in allocatedSlots)
+                    slot.Item = null!;
+                Unequiped?.Invoke(this, new UnequipedEventArgs(item));
+            }
+            else throw new ArgumentException($"{nameof(item)}:{item.Name} is not equiped.");
+        }
 
         private static bool DoesNotContainDuplicatedTypes(IEnumerable<Slot> slots)
         {
