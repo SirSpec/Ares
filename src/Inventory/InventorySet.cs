@@ -11,8 +11,11 @@ namespace Ares.Inventory
 
         public Weight Weight => Equipment.Weight + Backpack.Weight;
 
-        public InventorySet(Equipment equipment, Backpack backpack, Weight carryingCapacity) =>
+        public InventorySet(Equipment equipment, Backpack backpack, Weight carryingCapacity)
+        {
             (Equipment, Backpack, CarryingCapacity) = (equipment, backpack, carryingCapacity);
+            Equipment.Equiped += OnEquiped;
+        }
 
         public void ChangeCarryingCapacity(Weight carryingCapacity) =>
             CarryingCapacity = carryingCapacity.Value >= Weight.Value
@@ -52,6 +55,12 @@ namespace Ares.Inventory
                 Backpack.Remove(item);
             }
             else throw new InvalidOperationException($"Item {item} does not exists.");
+        }
+
+        private void OnEquiped(object? _, EquipedEventArgs args)
+        {
+            if (args.OldItem is not null)
+                Backpack.Put(args.OldItem);
         }
     }
 }
