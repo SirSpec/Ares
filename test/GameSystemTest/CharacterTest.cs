@@ -340,6 +340,7 @@ namespace Ares.GameSystemTest
 
             //Act
             var newWeapon = TestCharacterFactory.GetBow();
+            sut.Inventory.Equipment.Unequip(weapon);
             sut.Inventory.PickUp(newWeapon);
             sut.Inventory.Equip(newWeapon);
             var result1 = sut.StatisticsSet.GetStatistic<MeleeDamage>().Value;
@@ -361,6 +362,7 @@ namespace Ares.GameSystemTest
 
             //Act
             var newWeapon = TestCharacterFactory.GetBow();
+            sut.Inventory.Equipment.Unequip(weapon);
             sut.Inventory.PickUp(newWeapon);
             sut.Inventory.Equip(newWeapon);
             var result = sut.Inventory.Backpack.Items;
