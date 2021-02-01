@@ -145,6 +145,8 @@ namespace GameSystem
                 default:
                     throw new ArgumentException($"Equiped item has to be {nameof(Weapon)} or {nameof(BodyArmor)}.");
             }
+
+            StatisticsSet.Apply(args.EquipedItem.Enhancements.ToArray());
         }
 
         private void OnUnequiped(object? _, UnequipedEventArgs args)
@@ -164,6 +166,8 @@ namespace GameSystem
                 default:
                     throw new ArgumentException($"Unequiped item has to be {nameof(Weapon)} or {nameof(BodyArmor)}.");
             }
+
+            StatisticsSet.Remove(args.UnequipedItem.Enhancements.ToArray());
         }
 
         private int SumOfBodyArmorValue =>
