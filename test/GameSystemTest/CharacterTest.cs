@@ -434,6 +434,29 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
+        public void Unequip_MultipleEnhancedWeapons_DefaultStatistics()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+            var weapon = TestCharacterFactory.GetEnhancedWeapon(DamageType.Melee);
+            sut.Inventory.PickUp(weapon);
+            sut.Inventory.Equip(weapon);
+            var armor = TestCharacterFactory.GetEnhancedArmor();
+            sut.Inventory.PickUp(armor);
+            sut.Inventory.Equip(armor);
+            sut.Inventory.Equipment.Unequip(weapon);
+            sut.Inventory.Equipment.Unequip(armor);
+
+            //Act
+            var result1 = sut.StatisticsSet.GetStatistic<MeleeDamage>().Value;
+            var result2 = sut.StatisticsSet.GetStatistic<FireResistance>().Value;
+
+            //Assert
+            Assert.Equal(0, result1);
+            Assert.Equal(0, result2);
+        }
+
+        [Fact]
         public void Attack_Unarmed_DamageEqualsMeleeDamage()
         {
             //Arrange
