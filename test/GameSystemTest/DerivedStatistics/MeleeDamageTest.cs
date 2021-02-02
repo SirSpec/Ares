@@ -1,18 +1,19 @@
 using Ares.GameSystemTest.Stubs;
 using Ares.Statistics;
+using GameSystem.Statistics.DerivedStatistics.Offence;
 using GameSystem.Statistics.PrimaryStatistics.Attributes;
 using System;
 using Xunit;
 
-namespace Ares.GameSystemTest
+namespace Ares.GameSystemTest.DerivedStatistics
 {
-    public class ElementalDamageTest
+    public class MeleeDamageTest
     {
         [Fact]
         public void SetBaseValue_Negative_ThrowsArgumentException()
         {
             //Arrange
-            var sut = new ElementalDamageStub(new Intelligence());
+            var sut = new MeleeDamage(new Strength());
 
             //Act
             Action action = () => sut.SetBaseValue(-1);
@@ -22,10 +23,10 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void Value_DefaultIntelligence_Zero()
+        public void Value_DefaultStrength_Zero()
         {
             //Arrange
-            var sut = new ElementalDamageStub(new Intelligence());
+            var sut = new MeleeDamage(new Strength());
 
             //Act
             var results = sut.Value;
@@ -35,10 +36,10 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void BaseValue_DefaultIntelligence_Zero()
+        public void BaseValue_DefaultStrength_Zero()
         {
             //Arrange
-            var sut = new ElementalDamageStub(new Intelligence());
+            var sut = new MeleeDamage(new Strength());
 
             //Act
             var results = sut.BaseValue;
@@ -48,14 +49,14 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void Value_IncreaseIntelligenceWithDefaultBaseValue_Zero()
+        public void Value_IncreaseStrengthWithDefaultBaseValue_Zero()
         {
             //Arrange
-            var intelligence = new Intelligence();
-            var sut = new ElementalDamageStub(intelligence);
+            var strength = new Strength();
+            var sut = new MeleeDamage(strength);
 
             //Act
-            intelligence.SetBaseValue(10);
+            strength.SetBaseValue(10);
             var results = sut.Value;
 
             //Assert
@@ -63,14 +64,14 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void BaseValue_IncreaseIntelligenceWithDefaultBaseValue_Zero()
+        public void BaseValue_IncreaseStrengthWithDefaultBaseValue_Zero()
         {
             //Arrange
-            var intelligence = new Intelligence();
-            var sut = new ElementalDamageStub(intelligence);
+            var strength = new Strength();
+            var sut = new MeleeDamage(strength);
 
             //Act
-            intelligence.SetBaseValue(10);
+            strength.SetBaseValue(10);
             var results = sut.BaseValue;
 
             //Assert
@@ -78,10 +79,10 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void Value_SetBaseValueToFiveWithDefaultIntelligence_Five()
+        public void Value_SetBaseValueToFiveWithDefaultStrength_Five()
         {
             //Arrange
-            var sut = new ElementalDamageStub(new Intelligence());
+            var sut = new MeleeDamage(new Strength());
 
             //Act
             sut.SetBaseValue(5);
@@ -92,10 +93,10 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void BaseValue_SetBaseValueToFiveWithDefaultIntelligence_Five()
+        public void BaseValue_SetBaseValueToFiveWithDefaultStrength_Five()
         {
             //Arrange
-            var sut = new ElementalDamageStub(new Intelligence());
+            var sut = new MeleeDamage(new Strength());
 
             //Act
             sut.SetBaseValue(5);
@@ -109,8 +110,8 @@ namespace Ares.GameSystemTest
         public void Value_EnhancedWithDefault_Zero()
         {
             //Arrange
-            var intelligence = new Intelligence();
-            var sut = new ElementalDamageStub(intelligence);
+            var strength = new Strength();
+            var sut = new MeleeDamage(strength);
 
             //Act
             ((IEnhanceable)sut).AddEnhancement(new StubEnhancement(10));
@@ -124,7 +125,7 @@ namespace Ares.GameSystemTest
         public void BaseValue_EnhancedWithDefault_Zero()
         {
             //Arrange
-            var sut = new ElementalDamageStub(new Intelligence());
+            var sut = new MeleeDamage(new Strength());
 
             //Act
             ((IEnhanceable)sut).AddEnhancement(new StubEnhancement(10));
@@ -138,8 +139,8 @@ namespace Ares.GameSystemTest
         public void Value_EnhancedWithBaseValueSetToOne_Enhanced()
         {
             //Arrange
-            var intelligence = new Intelligence();
-            var sut = new ElementalDamageStub(intelligence);
+            var strength = new Strength();
+            var sut = new MeleeDamage(strength);
 
             //Act
             sut.SetBaseValue(1);
@@ -154,7 +155,7 @@ namespace Ares.GameSystemTest
         public void BaseValue_EnhancedWithBaseValueSetToOne_NotChanged()
         {
             //Arrange
-            var sut = new ElementalDamageStub(new Intelligence());
+            var sut = new MeleeDamage(new Strength());
 
             //Act
             sut.SetBaseValue(1);

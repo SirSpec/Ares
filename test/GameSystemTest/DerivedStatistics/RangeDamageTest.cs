@@ -5,15 +5,15 @@ using GameSystem.Statistics.PrimaryStatistics.Attributes;
 using System;
 using Xunit;
 
-namespace Ares.GameSystemTest
+namespace Ares.GameSystemTest.DerivedStatistics
 {
-    public class MeleeDamageTest
+    public class RangeDamageTest
     {
         [Fact]
         public void SetBaseValue_Negative_ThrowsArgumentException()
         {
             //Arrange
-            var sut = new MeleeDamage(new Strength());
+            var sut = new RangeDamage(new Dexterity());
 
             //Act
             Action action = () => sut.SetBaseValue(-1);
@@ -23,10 +23,10 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void Value_DefaultStrength_Zero()
+        public void Value_DefaultDexterity_Zero()
         {
             //Arrange
-            var sut = new MeleeDamage(new Strength());
+            var sut = new RangeDamage(new Dexterity());
 
             //Act
             var results = sut.Value;
@@ -36,10 +36,10 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void BaseValue_DefaultStrength_Zero()
+        public void BaseValue_DefaultDexterity_Zero()
         {
             //Arrange
-            var sut = new MeleeDamage(new Strength());
+            var sut = new RangeDamage(new Dexterity());
 
             //Act
             var results = sut.BaseValue;
@@ -49,14 +49,14 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void Value_IncreaseStrengthWithDefaultBaseValue_Zero()
+        public void Value_IncreaseDexterityWithDefaultBaseValue_Zero()
         {
             //Arrange
-            var strength = new Strength();
-            var sut = new MeleeDamage(strength);
+            var dexterity = new Dexterity();
+            var sut = new RangeDamage(dexterity);
 
             //Act
-            strength.SetBaseValue(10);
+            dexterity.SetBaseValue(10);
             var results = sut.Value;
 
             //Assert
@@ -64,14 +64,14 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void BaseValue_IncreaseStrengthWithDefaultBaseValue_Zero()
+        public void BaseValue_IncreaseDexterityWithDefaultBaseValue_Zero()
         {
             //Arrange
-            var strength = new Strength();
-            var sut = new MeleeDamage(strength);
+            var dexterity = new Dexterity();
+            var sut = new RangeDamage(dexterity);
 
             //Act
-            strength.SetBaseValue(10);
+            dexterity.SetBaseValue(10);
             var results = sut.BaseValue;
 
             //Assert
@@ -79,10 +79,10 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void Value_SetBaseValueToFiveWithDefaultStrength_Five()
+        public void Value_SetBaseValueToFiveWithDefaultDexterity_Five()
         {
             //Arrange
-            var sut = new MeleeDamage(new Strength());
+            var sut = new RangeDamage(new Dexterity());
 
             //Act
             sut.SetBaseValue(5);
@@ -93,10 +93,10 @@ namespace Ares.GameSystemTest
         }
 
         [Fact]
-        public void BaseValue_SetBaseValueToFiveWithDefaultStrength_Five()
+        public void BaseValue_SetBaseValueToFiveWithDefaultDexterity_Five()
         {
             //Arrange
-            var sut = new MeleeDamage(new Strength());
+            var sut = new RangeDamage(new Dexterity());
 
             //Act
             sut.SetBaseValue(5);
@@ -110,8 +110,8 @@ namespace Ares.GameSystemTest
         public void Value_EnhancedWithDefault_Zero()
         {
             //Arrange
-            var strength = new Strength();
-            var sut = new MeleeDamage(strength);
+            var dexterity = new Dexterity();
+            var sut = new RangeDamage(dexterity);
 
             //Act
             ((IEnhanceable)sut).AddEnhancement(new StubEnhancement(10));
@@ -125,7 +125,7 @@ namespace Ares.GameSystemTest
         public void BaseValue_EnhancedWithDefault_Zero()
         {
             //Arrange
-            var sut = new MeleeDamage(new Strength());
+            var sut = new RangeDamage(new Dexterity());
 
             //Act
             ((IEnhanceable)sut).AddEnhancement(new StubEnhancement(10));
@@ -139,8 +139,8 @@ namespace Ares.GameSystemTest
         public void Value_EnhancedWithBaseValueSetToOne_Enhanced()
         {
             //Arrange
-            var strength = new Strength();
-            var sut = new MeleeDamage(strength);
+            var dexterity = new Dexterity();
+            var sut = new RangeDamage(dexterity);
 
             //Act
             sut.SetBaseValue(1);
@@ -155,7 +155,7 @@ namespace Ares.GameSystemTest
         public void BaseValue_EnhancedWithBaseValueSetToOne_NotChanged()
         {
             //Arrange
-            var sut = new MeleeDamage(new Strength());
+            var sut = new RangeDamage(new Dexterity());
 
             //Act
             sut.SetBaseValue(1);

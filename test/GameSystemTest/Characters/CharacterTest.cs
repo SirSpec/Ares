@@ -10,7 +10,7 @@ using GameSystem.Statistics.PrimaryStatistics.Defence;
 using GameSystem.Weapons;
 using Xunit;
 
-namespace Ares.GameSystemTest
+namespace Ares.GameSystemTest.Characters
 {
     public static class TestCharacterFactory
     {
