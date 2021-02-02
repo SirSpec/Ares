@@ -4,7 +4,7 @@ using GameSystem.Statistics.DerivedStatistics.Energy;
 using GameSystem.Statistics.PrimaryStatistics.Attributes;
 using Xunit;
 
-namespace Ares.GameSystemTest
+namespace Ares.GameSystemTest.DerivedStatistics
 {
     public class HealthTest
     {

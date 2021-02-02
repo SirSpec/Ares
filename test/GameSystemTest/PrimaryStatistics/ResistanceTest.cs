@@ -3,7 +3,7 @@ using Ares.Statistics;
 using GameSystem.Statistics.PrimaryStatistics.Defence;
 using Xunit;
 
-namespace Ares.GameSystemTest
+namespace Ares.GameSystemTest.PrimaryStatistics
 {
     public class ResistanceTest
     {

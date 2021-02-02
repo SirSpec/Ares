@@ -1,79 +1,79 @@
 using System;
 using Ares.GameSystemTest.Stubs;
 using Ares.Statistics;
-using GameSystem.Statistics.PrimaryStatistics.Defence;
 using Xunit;
 
-namespace Ares.GameSystemTest
+namespace Ares.GameSystemTest.PrimaryStatistics
 {
-    public class ArmorTest
+    public class AttributeTest
     {
         [Fact]
-        public void SetBaseValue_Negative_ThrowsArgumentException()
+        public void SetBaseValue_Zero_ArgumentException()
         {
             //Arrange
-            var sut = new Armor();
+            var sut = new AttributeStub();
 
             //Act
-            Action action = () => sut.SetBaseValue(-1);
+            Action action = () => sut.SetBaseValue(0);
 
             //Assert
             Assert.Throws<ArgumentException>(action);
         }
 
         [Fact]
-        public void Value_Default_Zero()
+        public void Value_Default_One()
         {
             //Arrange
-            var sut = new Armor();
+            var sut = new AttributeStub();
 
             //Act
             var results = sut.Value;
 
             //Assert
-            Assert.Equal(0, results);
+            Assert.Equal(1, results);
         }
 
         [Fact]
-        public void SetBaseValue_PositiveValue_PositiveValue()
+        public void SetBaseValue_Two_ValueEqualsTwo()
         {
             //Arrange
-            const int expectedValue = 5;
-            var sut = new Armor();
+            var expectedValue = 2;
+            var sut = new AttributeStub();
 
             //Act
             sut.SetBaseValue(expectedValue);
+            var results = sut.Value;
 
             //Assert
-            Assert.Equal(expectedValue, sut.Value);
+            Assert.Equal(expectedValue, results);
         }
 
         [Fact]
         public void Value_Enhanced_EnhancedValue()
         {
             //Arrange
-            var sut = new Armor();
+            var sut = new AttributeStub();
 
             //Act
             ((IEnhanceable)sut).AddEnhancement(new StubEnhancement(10));
             var results = sut.Value;
 
             //Assert
-            Assert.Equal(10, results);
+            Assert.Equal(11, results);
         }
 
         [Fact]
         public void BaseValue_Enhanced_BaseValueNotChanged()
         {
             //Arrange
-            var sut = new Armor();
+            var sut = new AttributeStub();
 
             //Act
             ((IEnhanceable)sut).AddEnhancement(new StubEnhancement(10));
             var results = sut.BaseValue;
 
             //Assert
-            Assert.Equal(0, results);
+            Assert.Equal(1, results);
         }
     }
 }
