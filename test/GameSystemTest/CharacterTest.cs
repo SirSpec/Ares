@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Ares.GameSystemTest.Stubs;
 using Ares.Inventory;
 using Ares.Statistics;
 using GameSystem;
@@ -54,6 +55,26 @@ namespace Ares.GameSystemTest
                 new Weight(1),
                 new DamageDealt(5, DamageType.Range),
                 new List<IEnhancement<IStatistic>>());
+        }
+
+        public static Weapon GetEnhancedWeapon(DamageType damageType)
+        {
+            return new Weapon(
+                "Weapon",
+                SlotType.MainHand,
+                new Weight(1),
+                new DamageDealt(5, damageType),
+                new List<IEnhancement<IStatistic>> { new StubTypeEnhancement<MeleeDamage>(10) });
+        }
+
+        public static BodyArmor GetEnhancedArmor()
+        {
+            return new BodyArmor(
+                "Chest",
+                SlotType.Chest,
+                new Weight(1),
+                new ArmorValue(1),
+                new List<IEnhancement<IStatistic>> { new StubTypeEnhancement<FireResistance>(10) });
         }
 
         public static Weapon GetWeapon(DamageType damageType)
@@ -370,6 +391,46 @@ namespace Ares.GameSystemTest
             //Assert
             Assert.Single(result);
             Assert.Equal(weapon, result.First());
+        }
+
+        [Fact]
+        public void Equip_EnhancedWeapon_StatisticEnhanced()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+            var weapon = TestCharacterFactory.GetEnhancedWeapon(DamageType.Melee);
+            sut.Inventory.PickUp(weapon);
+            sut.Inventory.Equip(weapon);
+
+            //Act
+            var result = sut.StatisticsSet.GetStatistic<MeleeDamage>().Value;
+            var expected = weapon.Damage.Value + weapon.Enhancements.First().Enhance(0);
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void Equip_MultipleEnhancedWeapons_MultipleStatisticsEnhanced()
+        {
+            //Arrange
+            var sut = new Character("JohnDoe");
+            var weapon = TestCharacterFactory.GetEnhancedWeapon(DamageType.Melee);
+            sut.Inventory.PickUp(weapon);
+            sut.Inventory.Equip(weapon);
+            var armor = TestCharacterFactory.GetEnhancedArmor();
+            sut.Inventory.PickUp(armor);
+            sut.Inventory.Equip(armor);
+
+            //Act
+            var result1 = sut.StatisticsSet.GetStatistic<MeleeDamage>().Value;
+            var expected1 = weapon.Damage.Value + weapon.Enhancements.First().Enhance(0);
+            var result2 = sut.StatisticsSet.GetStatistic<FireResistance>().Value;
+            var expected2 = armor.Enhancements.First().Enhance(0);
+
+            //Assert
+            Assert.Equal(expected1, result1);
+            Assert.Equal(expected2, result2);
         }
 
         [Fact]
