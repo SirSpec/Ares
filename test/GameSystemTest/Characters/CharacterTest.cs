@@ -16,7 +16,7 @@ namespace Ares.GameSystemTest.Characters
     {
         public static Character GetCharacterWithBodyArmor()
         {
-            var character = new Character("JohnDoe");
+            var character = new CharacterFactory().NewCharacter("JohnDoe");
 
             var helmet = GetHelmet();
             character.Inventory.PickUp(helmet);
@@ -144,7 +144,7 @@ namespace Ares.GameSystemTest.Characters
         public void IsUnarmed_Default_True()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
 
             //Act
             var result = sut.IsUnarmed;
@@ -157,7 +157,7 @@ namespace Ares.GameSystemTest.Characters
         public void IsUnarmed_EquipedWeapon_False()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetSword();
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -173,7 +173,7 @@ namespace Ares.GameSystemTest.Characters
         public void SkillPoints_Default_One()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
 
             //Act
             var result = sut.SkillPoints;
@@ -186,7 +186,7 @@ namespace Ares.GameSystemTest.Characters
         public void SkillPoints_LevelUpToThirdLevel_Three()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
 
             //Act
             sut.Experience.Gain(300);
@@ -200,7 +200,7 @@ namespace Ares.GameSystemTest.Characters
         public void SkillPoints_LevelUpTwice_Three()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
 
             //Act
             sut.Experience.Gain(100);
@@ -215,7 +215,7 @@ namespace Ares.GameSystemTest.Characters
         public void IsDead_Default_False()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
 
             //Act
             var result = sut.IsDead;
@@ -228,7 +228,7 @@ namespace Ares.GameSystemTest.Characters
         public void IsDead_HealthPoolEmpty_True()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             sut.HealthPool.Decrease(sut.HealthPool.Current);
 
             //Act
@@ -274,7 +274,7 @@ namespace Ares.GameSystemTest.Characters
         public void MeleeDamage_EquipedWeapon_WeaponDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetSword();
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -290,7 +290,7 @@ namespace Ares.GameSystemTest.Characters
         public void RangeDamage_EquipedWeapon_WeaponDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetWeapon(DamageType.Range);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -306,7 +306,7 @@ namespace Ares.GameSystemTest.Characters
         public void FireDamage_EquipedWeapon_WeaponDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetWeapon(DamageType.Fire);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -322,7 +322,7 @@ namespace Ares.GameSystemTest.Characters
         public void IceDamage_EquipedWeapon_WeaponDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetWeapon(DamageType.Ice);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -338,7 +338,7 @@ namespace Ares.GameSystemTest.Characters
         public void LightningDamage_EquipedWeapon_WeaponDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetWeapon(DamageType.Lightning);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -354,7 +354,7 @@ namespace Ares.GameSystemTest.Characters
         public void Damage_ReplaceEquipedWeapon_NewWeaponDamageAndType()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetSword();
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -376,7 +376,7 @@ namespace Ares.GameSystemTest.Characters
         public void Equip_ReplaceEquipedItem_ItemPutBackToBackpack()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetSword();
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -397,7 +397,7 @@ namespace Ares.GameSystemTest.Characters
         public void Equip_EnhancedWeapon_StatisticEnhanced()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetEnhancedWeapon(DamageType.Melee);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -414,7 +414,7 @@ namespace Ares.GameSystemTest.Characters
         public void Equip_MultipleEnhancedWeapons_MultipleStatisticsEnhanced()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetEnhancedWeapon(DamageType.Melee);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -437,7 +437,7 @@ namespace Ares.GameSystemTest.Characters
         public void Unequip_MultipleEnhancedWeapons_DefaultStatistics()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetEnhancedWeapon(DamageType.Melee);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -460,7 +460,7 @@ namespace Ares.GameSystemTest.Characters
         public void Attack_Unarmed_DamageEqualsMeleeDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
 
             //Act
             var result = sut.Attack();
@@ -475,7 +475,7 @@ namespace Ares.GameSystemTest.Characters
         public void Attack_EquipedWeapon_DamageAdjustedByWeaponDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetSword();
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -492,7 +492,7 @@ namespace Ares.GameSystemTest.Characters
         public void Attack_EquipedRangeWeapon_RangeDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetBow();
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -510,7 +510,7 @@ namespace Ares.GameSystemTest.Characters
         public void Attack_EquipedFireWeapon_FireDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetWeapon(DamageType.Fire);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -528,7 +528,7 @@ namespace Ares.GameSystemTest.Characters
         public void Attack_EquipedIceWeapon_IceDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetWeapon(DamageType.Ice);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -546,7 +546,7 @@ namespace Ares.GameSystemTest.Characters
         public void Attack_EquipedLightningWeapon_LightningDamage()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetWeapon(DamageType.Lightning);
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);
@@ -564,7 +564,7 @@ namespace Ares.GameSystemTest.Characters
         public void Attack_EquipedMeleeWeapon_OtherDamageTypesZeroValue()
         {
             //Arrange
-            var sut = new Character("JohnDoe");
+            var sut = new CharacterFactory().NewCharacter("JohnDoe");
             var weapon = TestCharacterFactory.GetSword();
             sut.Inventory.PickUp(weapon);
             sut.Inventory.Equip(weapon);

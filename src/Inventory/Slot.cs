@@ -14,7 +14,8 @@ namespace Ares.Inventory
             get => item ?? throw new InvalidOperationException($"{nameof(Slot)} is Empty.");
             set => item = value is null || value.SlotType.HasFlag(SlotType)
                 ? value
-                : throw new InvalidOperationException($"{nameof(SlotType)} of the Item:{value.SlotType} is invalid:{SlotType}.");
+                : throw new InvalidOperationException(
+                    $"{nameof(SlotType)} of the Item:{value.SlotType} is invalid:{SlotType}.");
         }
 
         public Slot(Enum slotType) =>
