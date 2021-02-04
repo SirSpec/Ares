@@ -4,7 +4,7 @@ using System;
 
 namespace Ares.GameSystemTest.Stubs
 {
-    public class ElementalDamageStub : ElementalDamage
+    public class ElementalDamageStub : Damage
     {
         public override string Name => throw new NotImplementedException();
 
