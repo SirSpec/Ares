@@ -2,30 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ares.Statistics;
-using GameSystem.Statistics.PrimaryStatistics.Attributes;
+using Attribute = GameSystem.Statistics.PrimaryStatistics.Attributes.Attribute;
 
 namespace GameSystem.Statistics.DerivedStatistics.Offence
 {
-    public abstract class ElementalDamage : IModifiableStatistic, IEnhanceable
+    public abstract class Damage : IModifiableStatistic, IEnhanceable
     {
         private const int Minimum = 0;
         private int baseValue;
-        private readonly Intelligence intelligence;
+        private readonly Attribute attribute;
 
         public abstract string Name { get; }
-        public int BaseValue => baseValue * intelligence.Value;
+        public int BaseValue => baseValue * attribute.Value;
         public IList<IEnhancement<IStatistic>> Enhancements { get; }
 
         public int Value => BaseValue + EnhancementsValue;
 
-        public ElementalDamage(Intelligence intelligence) : this(Minimum, intelligence, new List<IEnhancement<IStatistic>>())
+        public Damage(Attribute attribute) : this(Minimum, attribute, new List<IEnhancement<IStatistic>>())
         {
         }
 
-        public ElementalDamage(int baseValue, Intelligence intelligence, IList<IEnhancement<IStatistic>> enhancements)
+        public Damage(int baseValue, Attribute attribute, IList<IEnhancement<IStatistic>> enhancements)
         {
             SetBaseValue(baseValue);
-            this.intelligence = intelligence;
+            this.attribute = attribute;
             Enhancements = enhancements;
         }
 

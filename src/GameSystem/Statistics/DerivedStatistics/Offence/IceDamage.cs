@@ -2,7 +2,7 @@
 
 namespace GameSystem.Statistics.DerivedStatistics.Offence
 {
-    public class IceDamage : ElementalDamage
+    public class IceDamage : Damage
     {
         public override string Name { get; } = "Ice Damage";
 
