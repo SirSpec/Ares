@@ -1,4 +1,4 @@
-﻿namespace GameSystem.Weapons
+﻿namespace Ares.GameSystem.Weapons
 {
     public enum DamageType
     {

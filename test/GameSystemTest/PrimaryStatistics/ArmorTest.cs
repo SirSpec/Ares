@@ -1,7 +1,7 @@
 using System;
 using Ares.GameSystemTest.Stubs;
 using Ares.Statistics;
-using GameSystem.Statistics.PrimaryStatistics.Defence;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Defence;
 using Xunit;
 
 namespace Ares.GameSystemTest.PrimaryStatistics

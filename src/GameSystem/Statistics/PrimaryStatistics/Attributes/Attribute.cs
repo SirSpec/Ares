@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GameSystem.Statistics.PrimaryStatistics.Attributes
+namespace Ares.GameSystem.Statistics.PrimaryStatistics.Attributes
 {
     public abstract class Attribute : IModifiableStatistic, IEnhanceable
     {

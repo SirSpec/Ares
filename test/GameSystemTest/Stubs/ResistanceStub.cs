@@ -1,5 +1,5 @@
 
-using GameSystem.Statistics.PrimaryStatistics.Defence;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Defence;
 
 namespace Ares.GameSystemTest.Stubs
 {

@@ -1,4 +1,4 @@
-﻿namespace GameSystem.Statistics.PrimaryStatistics.Defence
+﻿namespace Ares.GameSystem.Statistics.PrimaryStatistics.Defence
 {
     public class FireResistance : Resistance
     {

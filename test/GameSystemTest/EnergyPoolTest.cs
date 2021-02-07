@@ -1,5 +1,5 @@
 using System;
-using GameSystem;
+using Ares.GameSystem;
 using Xunit;
 
 namespace Ares.GameSystemTest

@@ -1,5 +1,5 @@
-using GameSystem.Statistics.DerivedStatistics.Offence;
-using GameSystem.Statistics.PrimaryStatistics.Attributes;
+using Ares.GameSystem.Statistics.DerivedStatistics.Offence;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
 using System;
 
 namespace Ares.GameSystemTest.Stubs

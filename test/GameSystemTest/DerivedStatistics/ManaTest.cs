@@ -1,7 +1,7 @@
 using Ares.GameSystemTest.Stubs;
 using Ares.Statistics;
-using GameSystem.Statistics.DerivedStatistics.Energy;
-using GameSystem.Statistics.PrimaryStatistics.Attributes;
+using Ares.GameSystem.Statistics.DerivedStatistics.Energy;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
 using Xunit;
 
 namespace Ares.GameSystemTest.DerivedStatistics

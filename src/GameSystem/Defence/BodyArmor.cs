@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Ares.Inventory;
 using Ares.Statistics;
 
-namespace GameSystem.Defence
+namespace Ares.GameSystem.Defence
 {
     public class BodyArmor : IEquipable
     {
