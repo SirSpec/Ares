@@ -10,7 +10,7 @@ using GameSystem.Defence;
 
 namespace GameSystem
 {
-    public class Character
+    public class Character : ITarget, IDamageDealer
     {
         public string Name { get; }
         public int SkillPoints { get; private set; }
