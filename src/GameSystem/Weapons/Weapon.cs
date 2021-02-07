@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Ares.Inventory;
 using Ares.Statistics;
 
-namespace GameSystem.Weapons
+namespace Ares.GameSystem.Weapons
 {
     public class Weapon : IEquipable
     {

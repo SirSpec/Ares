@@ -1,6 +1,6 @@
 ﻿using Ares.Statistics;
 
-namespace GameSystem.Enhancements
+namespace Ares.GameSystem.Enhancements
 {
     public class FlatEnhancement<TStatistic> : IEnhancement<TStatistic> where TStatistic : class, IStatistic
     {

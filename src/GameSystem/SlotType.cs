@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameSystem
+namespace Ares.GameSystem
 {
     [Flags]
     public enum SlotType

@@ -1,6 +1,6 @@
-using GameSystem.Weapons;
+using Ares.GameSystem.Weapons;
 
-namespace GameSystem
+namespace Ares.GameSystem
 {
     public interface IDamageDealer
     {

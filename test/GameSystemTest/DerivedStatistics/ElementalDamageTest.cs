@@ -1,6 +1,6 @@
 using Ares.GameSystemTest.Stubs;
 using Ares.Statistics;
-using GameSystem.Statistics.PrimaryStatistics.Attributes;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
 using System;
 using Xunit;
 

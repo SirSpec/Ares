@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameSystem.Weapons
+namespace Ares.GameSystem.Weapons
 {
     public readonly struct DamageDealt
     {

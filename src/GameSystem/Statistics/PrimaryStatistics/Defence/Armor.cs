@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ares.Statistics;
 
-namespace GameSystem.Statistics.PrimaryStatistics.Defence
+namespace Ares.GameSystem.Statistics.PrimaryStatistics.Defence
 {
     public class Armor : IModifiableStatistic, IEnhanceable
     {

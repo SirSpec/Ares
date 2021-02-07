@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameSystem.Defence
+namespace Ares.GameSystem.Defence
 {
     public readonly struct ArmorValue
     {

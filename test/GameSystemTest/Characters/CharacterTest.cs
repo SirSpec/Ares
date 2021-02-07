@@ -3,11 +3,11 @@ using System.Linq;
 using Ares.GameSystemTest.Stubs;
 using Ares.Inventory;
 using Ares.Statistics;
-using GameSystem;
-using GameSystem.Defence;
-using GameSystem.Statistics.DerivedStatistics.Offence;
-using GameSystem.Statistics.PrimaryStatistics.Defence;
-using GameSystem.Weapons;
+using Ares.GameSystem;
+using Ares.GameSystem.Defence;
+using Ares.GameSystem.Statistics.DerivedStatistics.Offence;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Defence;
+using Ares.GameSystem.Weapons;
 using Xunit;
 
 namespace Ares.GameSystemTest.Characters

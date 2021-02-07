@@ -1,7 +1,7 @@
 using Ares.GameSystemTest.Stubs;
 using Ares.Statistics;
-using GameSystem.Statistics.DerivedStatistics.Offence;
-using GameSystem.Statistics.PrimaryStatistics.Attributes;
+using Ares.GameSystem.Statistics.DerivedStatistics.Offence;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
 using System;
 using Xunit;
 

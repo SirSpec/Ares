@@ -1,6 +1,6 @@
-﻿using GameSystem.Statistics.PrimaryStatistics.Attributes;
+﻿using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
 
-namespace GameSystem.Statistics.DerivedStatistics.Offence
+namespace Ares.GameSystem.Statistics.DerivedStatistics.Offence
 {
     public class LightningDamage : Damage
     {

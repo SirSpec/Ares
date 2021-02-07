@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Ares.Statistics;
-using GameSystem.Statistics.PrimaryStatistics.Attributes;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
 
-namespace GameSystem.Statistics.DerivedStatistics.Energy
+namespace Ares.GameSystem.Statistics.DerivedStatistics.Energy
 {
     public class Health : IStatistic, IEnhanceable
     {

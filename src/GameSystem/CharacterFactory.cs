@@ -4,12 +4,12 @@ using System.Linq;
 using Ares.Inventory;
 using Ares.Progression;
 using Ares.Statistics;
-using GameSystem.Statistics.DerivedStatistics.Energy;
-using GameSystem.Statistics.DerivedStatistics.Offence;
-using GameSystem.Statistics.PrimaryStatistics.Attributes;
-using GameSystem.Statistics.PrimaryStatistics.Defence;
+using Ares.GameSystem.Statistics.DerivedStatistics.Energy;
+using Ares.GameSystem.Statistics.DerivedStatistics.Offence;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Defence;
 
-namespace GameSystem
+namespace Ares.GameSystem
 {
     public class CharacterFactory
     {

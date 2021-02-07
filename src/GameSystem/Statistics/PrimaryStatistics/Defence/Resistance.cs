@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GameSystem.Statistics.PrimaryStatistics.Defence
+namespace Ares.GameSystem.Statistics.PrimaryStatistics.Defence
 {
     public abstract class Resistance : IStatistic, IEnhanceable
     {

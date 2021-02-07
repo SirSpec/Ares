@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Ares.GameSystemTest.Stubs;
 using Ares.Statistics;
-using GameSystem.Enhancements;
+using Ares.GameSystem.Enhancements;
 using Xunit;
 
 namespace Ares.StatisticsTest

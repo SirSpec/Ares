@@ -3,12 +3,12 @@ using System.Linq;
 using Ares.Inventory;
 using Ares.Progression;
 using Ares.Statistics;
-using GameSystem.Statistics.DerivedStatistics.Offence;
-using GameSystem.Statistics.PrimaryStatistics.Defence;
-using GameSystem.Weapons;
-using GameSystem.Defence;
+using Ares.GameSystem.Statistics.DerivedStatistics.Offence;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Defence;
+using Ares.GameSystem.Weapons;
+using Ares.GameSystem.Defence;
 
-namespace GameSystem
+namespace Ares.GameSystem
 {
     public class Character : ITarget, IDamageDealer
     {

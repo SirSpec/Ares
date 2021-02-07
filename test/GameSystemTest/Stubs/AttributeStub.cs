@@ -1,4 +1,4 @@
-using GameSystem.Statistics.PrimaryStatistics.Attributes;
+using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
 
 namespace Ares.GameSystemTest.Stubs
 {

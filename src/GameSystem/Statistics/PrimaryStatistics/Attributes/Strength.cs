@@ -1,4 +1,4 @@
-﻿namespace GameSystem.Statistics.PrimaryStatistics.Attributes
+﻿namespace Ares.GameSystem.Statistics.PrimaryStatistics.Attributes
 {
     public class Strength : Attribute
     {

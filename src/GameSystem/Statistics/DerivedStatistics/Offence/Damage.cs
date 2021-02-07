@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ares.Statistics;
-using Attribute = GameSystem.Statistics.PrimaryStatistics.Attributes.Attribute;
+using Attribute = Ares.GameSystem.Statistics.PrimaryStatistics.Attributes.Attribute;
 
-namespace GameSystem.Statistics.DerivedStatistics.Offence
+namespace Ares.GameSystem.Statistics.DerivedStatistics.Offence
 {
     public abstract class Damage : IModifiableStatistic, IEnhanceable
     {
