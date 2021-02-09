@@ -4,6 +4,7 @@
     <ProjectReference Include="..\Statistics\Statistics.csproj" />
     <ProjectReference Include="..\Inventory\Inventory.csproj" />
     <ProjectReference Include="..\Progression\Progression.csproj" />
+    <ProjectReference Include="..\Spells\Spells.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
