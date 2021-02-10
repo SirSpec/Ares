@@ -8,6 +8,8 @@ using Ares.GameSystem.Statistics.DerivedStatistics.Energy;
 using Ares.GameSystem.Statistics.DerivedStatistics.Offence;
 using Ares.GameSystem.Statistics.PrimaryStatistics.Attributes;
 using Ares.GameSystem.Statistics.PrimaryStatistics.Defence;
+using Ares.Spells;
+using Ares.GameSystem.Effects;
 
 namespace Ares.GameSystem
 {
@@ -19,9 +21,12 @@ namespace Ares.GameSystem
                 skillPoints: 1,
                 GetStatisticsSet(),
                 GetInventorySet(),
+                new SpellBook(),
                 new ExperiencePool(points: 0),
                 healthPool: new EnergyPool(total: 10),
-                manaPool: new EnergyPool(total: 5));
+                manaPool: new EnergyPool(total: 5),
+                new List<IBuff>()
+            );
 
         private StatisticsSet GetStatisticsSet()
         {
@@ -54,7 +59,8 @@ namespace Ares.GameSystem
             new InventorySet(
                 new Equipment(GetSlots()),
                 new Backpack(capacity: 10),
-                new Weight(value: 10));
+                new Weight(value: 10)
+            );
 
         private IList<Slot> GetSlots() =>
             Enum.GetValues<SlotType>()

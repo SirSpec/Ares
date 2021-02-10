@@ -7,33 +7,42 @@ using Ares.GameSystem.Statistics.DerivedStatistics.Offence;
 using Ares.GameSystem.Statistics.PrimaryStatistics.Defence;
 using Ares.GameSystem.Weapons;
 using Ares.GameSystem.Defence;
+using Ares.Spells;
+using Ares.Spells.Effects;
+using System.Collections.Generic;
+using Ares.GameSystem.Effects;
 
 namespace Ares.GameSystem
 {
-    public class Character : ITarget, IDamageDealer
+    public class Character : ITarget, IDamageDealer, ICaster
     {
         public string Name { get; }
         public int SkillPoints { get; private set; }
         public StatisticsSet StatisticsSet { get; }
         public InventorySet Inventory { get; }
+        public SpellBook SpellBook { get; }
         public ExperiencePool Experience { get; }
         public EnergyPool HealthPool { get; }
         public EnergyPool ManaPool { get; }
+        public IList<IBuff> Buffs { get; }
 
         public Character(
             string name,
             int skillPoints,
             StatisticsSet statisticsSet,
             InventorySet inventory,
+            SpellBook spellBook,
             ExperiencePool experience,
             EnergyPool healthPool,
-            EnergyPool manaPool)
+            EnergyPool manaPool,
+            IList<IBuff> buffs)
         {
             Name = name;
             SkillPoints = skillPoints;
             StatisticsSet = statisticsSet;
 
             Inventory = inventory;
+            SpellBook = spellBook;
             Inventory.Equipment.Equiped += OnEquiped;
             Inventory.Equipment.Unequiped += OnUnequiped;
 
@@ -42,6 +51,7 @@ namespace Ares.GameSystem
 
             HealthPool = healthPool;
             ManaPool = manaPool;
+            Buffs = buffs;
         }
 
         public bool IsDead => HealthPool.Current == 0;
@@ -78,6 +88,26 @@ namespace Ares.GameSystem
             };
 
             HealthPool.Decrease(reducedDamage > 0 ? reducedDamage : 1);
+        }
+
+        public IEffect Cast(Spell spell)
+        {
+            if (SpellBook.Contains(spell) && ManaPool.Current >= spell.Cost)
+            {
+                ManaPool.Decrease(spell.Cost);
+                return spell.Effect;
+            }
+            else throw new ArgumentException($"Cannot cast {nameof(spell)}:{spell.Name}.");
+        }
+
+        public void ApplyBuff(IBuff buff)
+        {
+            if (Buffs.Contains(buff) is false)
+            {
+                Buffs.Add(buff);
+                StatisticsSet.Apply(buff.Enhancement);
+            }
+            else throw new ArgumentException($"{nameof(buff)}:{buff.Name} already added.");
         }
 
         private void OnLeveledUpHandler(object? _, Level level) =>
