@@ -8,15 +8,16 @@ namespace Ares.GameSystemTest.Characters
 {
     public class CharacterBuffsTest
     {
+        private Buff TestBuff => new Buff("TestBuff", new StubTypeEnhancement<Strength>(10));
+
         [Fact]
         public void AddBuff_TestBuff_StatisticBuffed()
         {
             //Arrange
             var sut = TestCharacterFactory.GetCharacterWithBodyArmor();
-            var damage = new Buff("TestBuff", new StubTypeEnhancement<Strength>(10));
 
             //Act
-            sut.AddBuff(damage);
+            sut.AddBuff(TestBuff);
             var result = sut.StatisticsSet.GetStatistic<Strength>().Value;
 
             //Assert
@@ -28,11 +29,12 @@ namespace Ares.GameSystemTest.Characters
         {
             //Arrange
             var sut = TestCharacterFactory.GetCharacterWithBodyArmor();
-            var damage = new Buff("TestBuff", new StubTypeEnhancement<Strength>(10));
-            sut.AddBuff(damage);
+            var testBuff = TestBuff;
+
+            sut.AddBuff(testBuff);
 
             //Act
-            Action action = () => sut.AddBuff(damage);
+            Action action = () => sut.AddBuff(testBuff);
 
             //Assert
             Assert.Throws<ArgumentException>(action);
@@ -43,11 +45,11 @@ namespace Ares.GameSystemTest.Characters
         {
             //Arrange
             var sut = TestCharacterFactory.GetCharacterWithBodyArmor();
-            var damage = new Buff("TestBuff", new StubTypeEnhancement<Strength>(10));
-            sut.AddBuff(damage);
+            var testBuff = TestBuff;
+            sut.AddBuff(testBuff);
 
             //Act
-            sut.RemoveBuff(damage);
+            sut.RemoveBuff(testBuff);
             var result = sut.StatisticsSet.GetStatistic<Strength>().Value;
 
             //Assert
@@ -59,10 +61,9 @@ namespace Ares.GameSystemTest.Characters
         {
             //Arrange
             var sut = TestCharacterFactory.GetCharacterWithBodyArmor();
-            var damage = new Buff("TestBuff", new StubTypeEnhancement<Strength>(10));
 
             //Act
-            Action action = () => sut.RemoveBuff(damage);
+            Action action = () => sut.RemoveBuff(TestBuff);
 
             //Assert
             Assert.Throws<ArgumentException>(action);
