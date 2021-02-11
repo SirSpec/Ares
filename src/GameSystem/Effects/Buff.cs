@@ -2,7 +2,7 @@
 
 namespace Ares.GameSystem.Effects
 {
-    public readonly struct Buff : IBuff
+    public class Buff : IBuff
     {
         public string Name { get; }
         public IEnhancement<IStatistic> Enhancement { get; }
