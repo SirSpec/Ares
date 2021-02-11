@@ -100,7 +100,7 @@ namespace Ares.GameSystem
             else throw new ArgumentException($"Cannot cast {nameof(spell)}:{spell.Name}.");
         }
 
-        public void ApplyBuff(IBuff buff)
+        public void AddBuff(IBuff buff)
         {
             if (Buffs.Contains(buff) is false)
             {
@@ -108,6 +108,16 @@ namespace Ares.GameSystem
                 StatisticsSet.Apply(buff.Enhancement);
             }
             else throw new ArgumentException($"{nameof(buff)}:{buff.Name} already added.");
+        }
+
+        public void RemoveBuff(IBuff buff)
+        {
+            if (Buffs.Contains(buff))
+            {
+                Buffs.Remove(buff);
+                StatisticsSet.Remove(buff.Enhancement);
+            }
+            else throw new ArgumentException($"{nameof(buff)}:{buff.Name} is not added.");
         }
 
         private void OnLeveledUpHandler(object? _, Level level) =>
