@@ -1,6 +1,6 @@
 ﻿namespace Ares.GameSystem.Effects
 {
-    public readonly struct DefensiveInstant : IInstant<int>
+    public class DefensiveInstant : IInstant<int>
     {
         public string Name { get; }
         public int Value { get; }
