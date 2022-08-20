@@ -1,5 +1,3 @@
-# Fantasy role-playing game system
-
 ```
  █████╗ ██████╗ ███████╗███████╗
 ██╔══██╗██╔══██╗██╔════╝██╔════╝
@@ -8,3 +6,6 @@
 ██║  ██║██║  ██║███████╗███████║
 ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝
 ```
+
+# References
+- [D&D Basic Rules, Version 1.0, Released November 2018](https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf)
