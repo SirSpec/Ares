@@ -42,6 +42,7 @@ Every character and monster in the game has capabilities defined by six ability 
 
 These ability scores, and the ability modifiers derived from them, are the basis for almost every d20 roll.
 - Ability scores range from 3 to 18 for most adventurers.
+- You can’t increase an ability score above 20.
 - Monsters might have scores as low as 1 or as high as 30.
 
 # Ability Scores and Modifiers
