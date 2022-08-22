@@ -1,8 +1,6 @@
 # Character sheet
 - Character Name
 - Player Name
-- Background
-- Alignment
 - [Level and experience points](./Level.md)
 - [Class](./Classes.md)
 - [Race](./Races.md)
@@ -23,10 +21,14 @@
 - Death saves
     - Successes
     - Failures
-- Personality traits, ideals, bonds and flaws
-- Features and traits
-- Other proficiencies and languages
-- Appearance
+- [Personality](./PersonalityBackground.md)
+    - Personality traits, ideals, bonds and flaws
+    - Alignment
+    - Inspiration
+    - Features and traits
+    - Other proficiencies and languages
+    - Appearance
+- [Background](./Backgrounds.md)
 
 # Determine Ability Scores
 ## Randomly
