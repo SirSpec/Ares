@@ -9,11 +9,11 @@
 - [Proficiencies](./Proficiency.md)
 - [Proficiency bonus](./Proficiency.md)
 - [Skills](./Skills.md)
-- [Equipment](./Equipment.md)
+- [Equipment](../equipment/Equipment.md)
 - Armor Class
 - Total weight
 - Gold pieces (gp)
-- [Hit points](./HitPointDie.md)
+- [Hit points](./HitPointDice.md)
     - Hit points maximum
     - Current hit points
     - Temporary hit points
@@ -21,14 +21,14 @@
 - Death saves
     - Successes
     - Failures
-- [Personality](./PersonalityBackground.md)
-    - Personality traits, ideals, bonds and flaws
+- [Personality](./Personality.md)
     - Alignment
     - Inspiration
-    - Features and traits
-    - Other proficiencies and languages
     - Appearance
 - [Background](./Backgrounds.md)
+    - Features and traits
+    - Personality traits, ideals, bonds and flaws
+    - Other proficiencies and languages
 
 # Determine Ability Scores
 ## Randomly
