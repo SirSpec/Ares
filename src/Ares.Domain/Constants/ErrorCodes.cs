@@ -26,7 +26,7 @@ public static class ErrorCodes
 
     public static class Character
     {
-        public const string MaximumExperienceGained = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumExperienceGained)}";
+        public const string MaximumLevelGained = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumLevelGained)}";
         public const string MaximumSuccessededDeathSavesReached = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumSuccessededDeathSavesReached)}";
         public const string MaximumFailedDeathSavesReached = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumFailedDeathSavesReached)}";
     }
