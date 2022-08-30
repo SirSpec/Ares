@@ -61,4 +61,24 @@ public class LevelTest
 
         Assert.Equal(expectedTier, actual);
     }
+
+    [Fact]
+    public void IsMaximum_20ThLevel_True()
+    {
+        var sut = new Level(20);
+
+        var actual = sut.IsMaximum;
+
+        Assert.True(actual);
+    }
+
+    [Fact]
+    public void IsMaximum_19ThLevel_False()
+    {
+        var sut = new Level(19);
+
+        var actual = sut.IsMaximum;
+
+        Assert.False(actual);
+    }
 }

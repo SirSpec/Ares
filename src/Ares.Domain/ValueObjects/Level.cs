@@ -5,7 +5,20 @@ namespace Ares.Domain.ValueObjects;
 
 public record Level
 {
+    public const int Maximum = 20;
+
+    public Level(int value) =>
+        Value = value >= 1 && value <= Maximum
+            ? value
+            : throw new DomainException(ErrorCodes.Level.InvalidValue, (nameof(value), value));
+
+    public Level(Experience experience) =>
+        Value = CalculateLevel(experience);
+
     public int Value { get; }
+    public bool IsMaximum =>
+        Value == Maximum;
+
     public int Tier => Value switch
     {
         >= 1 and <= 4 => 1,
@@ -14,14 +27,6 @@ public record Level
         >= 17 and <= 20 => 4,
         _ => throw new DomainException(ErrorCodes.Level.InvalidValue, (nameof(Value), Value))
     };
-
-    public Level(int value) =>
-        Value = value >= 1 && value <= 20
-            ? value
-            : throw new DomainException(ErrorCodes.Level.InvalidValue, (nameof(value), value));
-
-    public Level(Experience experience) =>
-        Value = CalculateLevel(experience);
 
     public static implicit operator int(Level level) =>
         level.Value;
