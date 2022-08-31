@@ -8,9 +8,9 @@ public record DieRoll
     public int Value { get; }
     public int Type { get; }
 
-    public DieRoll(uint value, uint type)
+    public DieRoll(int value, uint type)
     {
-        Value = value > 0 && value <= type
+        Value = value >= 1 && value <= type
             ? (int)value
             : throw new DomainException(ErrorCodes.DieRoll.InvalidValue, (nameof(value), value));
 

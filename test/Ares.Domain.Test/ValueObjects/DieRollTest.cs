@@ -11,7 +11,7 @@ public class DieRollTest
     [InlineData(0, 1)]
     [InlineData(1, 0)]
     [InlineData(2, 1)]
-    public void DieRoll_InvalidValue_ThrowsDomainException(uint value, uint type)
+    public void DieRoll_InvalidValue_ThrowsDomainException(int value, uint type)
     {
         var action = () => new DieRoll(value, type);
 
@@ -21,7 +21,7 @@ public class DieRollTest
     [Theory]
     [InlineData(1, 2)]
     [InlineData(2, 2)]
-    public void ValueAndType_ValidData_ValidValueAndType(uint value, uint type)
+    public void ValueAndType_ValidData_ValidValueAndType(int value, uint type)
     {
         var sut = new DieRoll(value, type);
 
@@ -44,7 +44,7 @@ public class DieRollTest
     public void ImplicitOperatorInt_DieRoll_IntValue()
     {
         int expectedValue = 2;
-        var sut = new DieRoll(((uint)expectedValue), 5);
+        var sut = new DieRoll((expectedValue), 5);
 
         int value = sut;
 
