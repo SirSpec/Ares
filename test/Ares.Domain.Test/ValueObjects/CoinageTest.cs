@@ -58,4 +58,16 @@ public class CoinageTest
 
         Assert.Equal(30, actual.Value);
     }
+
+    [Theory]
+    [InlineData(1, 0.02)]
+    [InlineData(50, 1.0)]
+    public void Weight_ValidCoinage_ValidWeight(int value, double expected)
+    {
+        var sut = new Coinage(value, PreciousMetal.Copper);
+
+        var actual = sut.Weight;
+
+        Assert.Equal(expected, actual, precision: 5);
+    }
 }

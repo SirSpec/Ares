@@ -5,6 +5,8 @@ namespace Ares.Domain.ValueObjects;
 
 public record Coinage
 {
+    public const double CoinWeight = 0.02;
+
     public Coinage(int value, PreciousMetal preciousMetal)
     {
         Value = value >= 0
@@ -16,6 +18,8 @@ public record Coinage
 
     public int Value { get; }
     public PreciousMetal PreciousMetal { get; }
+    public double Weight =>
+        Value * CoinWeight;
 
     public static Coinage operator +(Coinage left, Coinage right) =>
         left.PreciousMetal == right.PreciousMetal
