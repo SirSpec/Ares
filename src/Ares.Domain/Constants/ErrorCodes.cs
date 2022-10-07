@@ -30,6 +30,11 @@ public static class ErrorCodes
         public const string IncompatibleCoinage = $"{nameof(Ares.Domain.ValueObjects.Coinage)}:{nameof(IncompatibleCoinage)}";
     }
 
+    public static class CoinageBag
+    {
+        public const string InvalidDictionaryKeys = $"{nameof(Ares.Domain.ValueObjects.CoinageBag)}:{nameof(InvalidDictionaryKeys)}";
+    }
+
     public static class Character
     {
         public const string MaximumLevelGained = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumLevelGained)}";
