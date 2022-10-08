@@ -13,7 +13,7 @@ public record Level
             : throw new DomainException(ErrorCodes.Level.InvalidValue, (nameof(value), value));
 
     public Level(Experience experience) =>
-        Value = CalculateLevel(experience);
+        Value = CalculateLevelValue(experience);
 
     public int Value { get; }
     public bool IsMaximum =>
@@ -37,7 +37,7 @@ public record Level
         tier = Tier;
     }
 
-    private static int CalculateLevel(Experience experience) =>
+    private static int CalculateLevelValue(Experience experience) =>
         experience.Value switch
         {
             >= Experience.Minimum and < 300 => 1,
