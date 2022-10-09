@@ -19,4 +19,7 @@ public record AbilityScore
         value = Value;
         modifier = Modifier;
     }
+
+    public AbilityScore GetIncreasedBy(int value) =>
+        new AbilityScore(Value + value);
 }

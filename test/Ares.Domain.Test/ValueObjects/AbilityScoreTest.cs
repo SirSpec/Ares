@@ -37,7 +37,7 @@ public class AbilityScoreTest
     [InlineData(28, 9)]
     [InlineData(29, 9)]
     [InlineData(30, 10)]
-    public void AbilityScoreModifier_Score_Modifier(int score, int expectedModifier)
+    public void Modifier_Score_Modifier(int score, int expectedModifier)
     {
         var sut = new AbilityScore(score);
 
@@ -49,10 +49,23 @@ public class AbilityScoreTest
     [Theory]
     [InlineData(0)]
     [InlineData(31)]
-    public void AbilityScore_InvalidValue_ThrowsDomainException(int score)
+    public void Constructor_InvalidValue_ThrowsDomainException(int score)
     {
         var action = () => new AbilityScore(score);
 
         Assert.Throws<DomainException>(action);
+    }
+
+    [Theory]
+    [InlineData(1, 10, 11)]
+    [InlineData(5, 4, 9)]
+    public void GetIncreasedBy_Value_IncreasedAndImmutable(int baseValue, int increase, int expected)
+    {
+        var sut = new AbilityScore(baseValue);
+
+        var actual = sut.GetIncreasedBy(increase);
+
+        Assert.Equal(baseValue, sut.Value);
+        Assert.Equal(expected, actual.Value);
     }
 }
