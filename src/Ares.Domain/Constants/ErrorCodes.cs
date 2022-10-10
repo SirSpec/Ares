@@ -35,9 +35,13 @@ public static class ErrorCodes
         public const string InvalidDictionaryKeys = $"{nameof(Ares.Domain.ValueObjects.CoinageBag)}:{nameof(InvalidDictionaryKeys)}";
     }
 
+    public static class AbilityScoreList
+    {
+        public const string InvalidDictionaryKeys = $"{nameof(Ares.Domain.ValueObjects.AbilityScoreList)}:{nameof(InvalidDictionaryKeys)}";
+    }
+
     public static class Character
     {
-        public const string MaximumLevelGained = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumLevelGained)}";
         public const string MaximumSuccessededDeathSavesReached = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumSuccessededDeathSavesReached)}";
         public const string MaximumFailedDeathSavesReached = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumFailedDeathSavesReached)}";
     }
