@@ -40,6 +40,11 @@ public static class ErrorCodes
         public const string InvalidDictionaryKeys = $"{nameof(Ares.Domain.ValueObjects.AbilityScoreList)}:{nameof(InvalidDictionaryKeys)}";
     }
 
+    public static class DeathSaves
+    {
+        public const string InvalidArgument = $"{nameof(Ares.Domain.ValueObjects.DeathSaves)}:{nameof(InvalidArgument)}";
+    }
+
     public static class Character
     {
         public const string MaximumSuccessededDeathSavesReached = $"{nameof(Ares.Domain.Entities.Character)}:{nameof(MaximumSuccessededDeathSavesReached)}";
